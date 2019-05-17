@@ -3,7 +3,7 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 require('dotenv').config();
-const User = require("../models/users")
+const User = require("../models/user")
 // eslint-disable-next-line no-unused-vars
 const keys = require('./keys');
 

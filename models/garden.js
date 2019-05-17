@@ -1,11 +1,8 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable func-names */
 const mongoose = require("mongoose");
-// const crypto = require("crypto");
-// const jwt = require("jsonwebtoken");
 
-// Object destructuring
+// Save a reference to the Schema constructor
 const { Schema } = mongoose;
+
 
 // create subDocument for modeling plants in the garden
 const PlantSchema = new Schema({
@@ -36,30 +33,15 @@ const GardenSchema = new Schema({
    },
    // location datatype
    location: {
-      type: Number,
+      type: String,
       required: true,
-      unique: true
+   },
+   plantedDate: {
+      type: String
    },
    plants: [PlantSchema]
 });
 
+const Garden = mongoose.model("Garden", GardenSchema);
 
-const UserSchema = new Schema({
-   username: {
-      type: String,
-      required: true,
-      unique: true,
-   },
-   googleId: {
-      type: String,
-      required: true
-   },
-   garden: [GardenSchema]
-});
-
-// creating model
-// 'Users' -> name of collection 
-const User = mongoose.model('Users', UserSchema);
-
-// export User
-module.exports = User;
+module.exports = Garden;

@@ -4,8 +4,7 @@ const cookieSession = require("cookie-session");
 const passport = require("passport");
 const mongoose = require('mongoose');
 const exphbs = require('express-handlebars');
-const authRoutes = require('./routes/auth-routes')
-const profileRoutes = require('./routes/profile-routes')
+
 // eslint-disable-next-line no-unused-vars
 const passportConfig = require('./config/passport');
 
@@ -49,15 +48,64 @@ mongoose.connect(mongoUri, {
    console.log(`CONNECTED TO MONGODB`)
 });
 
+// set up routes
+const routes = require("./routes");
 
-app.use("/auth", authRoutes);
-app.use("/profile", profileRoutes);
+app.use(routes); 
+
+
 
 
 // set up routes
-// placeholder for main..
+
 app.get("/", (req, res) =>{
   res.render('index')
 });
+
+
+
+
+const authCheck = (req, res, next) => {
+  if(!req.user){
+     console.log('you are not logged in!!!');
+      res.redirect('/auth/login');
+  } else {
+     console.log(`authCheck req.user._id: ${req.user._id}`)
+      next();
+  }
+};
+
+const db = require("./models");
+
+app.post("/api/gardens", authCheck, (req, res) => {
+
+
+  db.Garden.create(req.body)
+   .then((dbGarden) => {
+     
+     return db.User.findOneAndUpdate({
+       username: req.user.username
+    }, 
+    { 
+      $push: { gardens: dbGarden._id } 
+    }, 
+    { 
+      new: true 
+    });
+   })
+   .then((dbUser) => {
+     // If the User was updated successfully, send it back to the client
+     res.json(dbUser);
+   })
+   .catch((err) => {
+     // If an error occurs, send it back to the client
+     res.json(err);
+   });
+});
+
+
+
+
+
 
 app.listen(PORT, () => console.log(`🗺️ => now listening on http://localhost:${PORT}`));

@@ -1,4 +1,8 @@
+
 const router = require("express").Router();
+
+
+
 
 const authCheck = (req, res, next) => {
    if(!req.user){
@@ -17,8 +21,28 @@ router.get("/", authCheck, (req, res) => {
    console.log(`req.user: ${req.user}`);
 
 
-   // bug - req.user: mongoDB _id
-   res.send(`You are logged in. This is your profile: ${req.user.username}`);
+   
+   // res.send(`You are logged in. Your username is: ${req.user.username}`);
+
+   res.render("profile", {
+      loggedIn: true,
+      helpers: {
+         username: req.user.username
+      }
+   })
 }) 
+
+// overview of gardens.. 
+router.get("/gardens", (req, res) => {
+   
+   res.render("gardens", {
+      loggedIn: true,
+      helpers: {
+         username: req.user.username
+      }
+   })
+})
+
+
 
 module.exports = router;

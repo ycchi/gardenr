@@ -1,14 +1,21 @@
 <nav>
    <ul>
       <li><a href="/auth/logout">Logout</a></li>
-      <li><a href="/auth/login">Login</a></li>
+
       <li><a href="/">Homepage</a></li>
    </ul>
 </nav>
 <header>
-   <h1>Login using...</h1>
+   {{#if loggedIn}}
+   <h1>you are logged in.</h1>
+   <p>your username is: {{username}}</p>
+   {{/if}}
 </header>
 <main>
+   {{#unless loggedIn}}
    <a class="google-btn" href="/auth/google">Google</a>
-</main>
+   {{/unless}}
 
+   <a href="/profile/gardens">go to gardens</a>
+
+</main>
