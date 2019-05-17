@@ -1,9 +1,11 @@
-console.log('app.js running');
+ console.log(`frontend app.js running`)
+ 
+ // get reference to section on page
+ const $gardensSection = $("#gardens-section");
 
 // function to add a garden
 function addGarden(e) {
    
-   e.preventDefault();
 
    const gardenData = {
       name: $("#garden-name").val().trim(),
@@ -13,15 +15,10 @@ function addGarden(e) {
  
    console.log(gardenData)
 
- 
-   
    $.ajax({
-     url: '/api/gardens',
+     url: '/api/user',
      method: 'post',
      data: gardenData,
-   //   headers: {
-   //     authorization: `Bearer ${token}`
-   //   }
    })
      .then(function(response) {
        console.log(response);
@@ -33,8 +30,37 @@ function addGarden(e) {
  }
 
 
+ // function to GET gardens from 'api/gardens'
+ function getGardenData () {
+    $.ajax({
+       url: '/api/gardens',
+       method: 'GET'
+    })
+      .then(printGardens)
+      .catch(err => {
+         console.log(err);
+      });
+ }
+
+
+// function to print gardenData to page
+ function printGardens (gardenData) {
+   $gardensSection.empty();
+   console.log(`RUNNING: printGardens `)
+   console.log(`gardenData: ${gardenData._id}`)
+
+   for(let i = 0; i < gardenData.gardens.length; i++){
+      $("<li>")
+         .append(`<b>${gardenData.gardens[i].name}</b>`)
+         .appendTo($gardensSection)
+   }
+ }
+
+
+
+
  $(document).ready(function() {
-   
+   getGardenData();
    $('#add-garden-form').on('submit', addGarden);
    
  });

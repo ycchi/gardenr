@@ -16,13 +16,6 @@ const authCheck = (req, res, next) => {
 
 router.get("/", authCheck, (req, res) => {
 
-   // test
-   console.log(`AFTER REDIRECT...`);
-   console.log(`req.user: ${req.user}`);
-
-
-   
-   // res.send(`You are logged in. Your username is: ${req.user.username}`);
 
    res.render("profile", {
       loggedIn: true,

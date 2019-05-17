@@ -5,8 +5,8 @@ const db = require('../models');
 const handle = require('../utils/promiseHandler');
 
 
-// GET bookmarks '/api/bookmarks' for a user
-const getGardens = async (req, res) => {
+// GET gardens '/api/gardens' for a user
+const getUser = async (req, res) => {
 
    console.log(`RUNNING: getGardens`);
    console.log(`api/gardens req: ${req.user}`)
@@ -20,8 +20,11 @@ const getGardens = async (req, res) => {
  };
 
 
-
+// POST garden '/api/gardens'
 const addGarden = (req, res) => {
+
+  
+  console.log(`RUNNING: addGarden`);
 
    db.Garden.create(req.body)
     .then((dbGarden) => {
@@ -30,7 +33,8 @@ const addGarden = (req, res) => {
         username: req.user.username
      }, 
      { 
-       $push: { gardens: dbGarden._id } 
+      $push: { gardens: dbGarden._id } 
+      // $push: { gardens: dbGarden.name } 
      }, 
      { 
        new: true 
@@ -48,9 +52,25 @@ const addGarden = (req, res) => {
 
 
 
+ // GET Garden populated under user obj
+ function getUserGardens (req, res) {
+   // Find user by id
+   db.User.findById(req.user._id)
+     // Specify that we want to populate the retrieved users with any associated gardens
+     .populate("gardens")
+     .then((dbUser) => {
+       // If able to successfully find and associate all Users and gardens, send them back to the client
+       res.json(dbUser);
+     })
+     .catch((err) => {
+       // If an error occurs, send it back to the client
+       res.json(err);
+     });
+ };
 
 
  module.exports = {
     addGarden,
-    getGardens
+    getUser,
+    getUserGardens
  }
