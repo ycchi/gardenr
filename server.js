@@ -65,43 +65,43 @@ app.get("/", (req, res) =>{
 
 
 
-const authCheck = (req, res, next) => {
-  if(!req.user){
-     console.log('you are not logged in!!!');
-      res.redirect('/auth/login');
-  } else {
-     console.log(`authCheck req.user._id: ${req.user._id}`)
-      next();
-  }
-};
+// const authCheck = (req, res, next) => {
+//   if(!req.user){
+//      console.log('you are not logged in!!!');
+//       res.redirect('/auth/login');
+//   } else {
+//      console.log(`authCheck req.user._id: ${req.user._id}`)
+//       next();
+//   }
+// };
 
-const db = require("./models");
+// const db = require("./models");
 
-app.post("/api/gardens", authCheck, (req, res) => {
+// app.post("/api/gardens", authCheck, (req, res) => {
 
 
-  db.Garden.create(req.body)
-   .then((dbGarden) => {
+//   db.Garden.create(req.body)
+//    .then((dbGarden) => {
      
-     return db.User.findOneAndUpdate({
-       username: req.user.username
-    }, 
-    { 
-      $push: { gardens: dbGarden._id } 
-    }, 
-    { 
-      new: true 
-    });
-   })
-   .then((dbUser) => {
-     // If the User was updated successfully, send it back to the client
-     res.json(dbUser);
-   })
-   .catch((err) => {
-     // If an error occurs, send it back to the client
-     res.json(err);
-   });
-});
+//      return db.User.findOneAndUpdate({
+//        username: req.user.username
+//     }, 
+//     { 
+//       $push: { gardens: dbGarden._id } 
+//     }, 
+//     { 
+//       new: true 
+//     });
+//    })
+//    .then((dbUser) => {
+//      // If the User was updated successfully, send it back to the client
+//      res.json(dbUser);
+//    })
+//    .catch((err) => {
+//      // If an error occurs, send it back to the client
+//      res.json(err);
+//    });
+// });
 
 
 

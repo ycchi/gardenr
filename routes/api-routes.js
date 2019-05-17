@@ -18,7 +18,7 @@ const authCheck = (req, res, next) => {
 
 
 router.get("/gardens", authCheck, getGardens);
-// router.post("/gardens", authCheck, addGarden);
+router.post("/gardens", authCheck, addGarden);
 
 // router.post("/gardens", authCheck, (req, res) => {
 //    console.log(`req.body: ${req.body}`);

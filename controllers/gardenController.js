@@ -1,7 +1,7 @@
 
 // dependencies
 const { User } = require('../models');
-const { Garden } = require('../models');
+const db = require('../models');
 const handle = require('../utils/promiseHandler');
 
 
@@ -10,7 +10,7 @@ const getGardens = async (req, res) => {
 
    console.log(`RUNNING: getGardens`);
    console.log(`api/gardens req: ${req.user}`)
-   const [userErr, gardenData] = await handle(User.findById(req.user._id, 'garden'));
+   const [userErr, gardenData] = await handle(User.findById(req.user._id, 'gardens'));
  
    if (userErr) {
      return res.json(500).json(userErr);
@@ -21,55 +21,34 @@ const getGardens = async (req, res) => {
 
 
 
-// CREATE/POST bookmark for a user '/api/gardens'
-const addGarden = async (req, res) => {   
+const addGarden = (req, res) => {
 
-   console.log(`RUNNING: addGarden`);
-   console.log(req.user._id)
-
-   const [gardenFindErr, userProfile] = await handle(User.findById(req.user._id));
- 
-   if (gardenFindErr) {
-     return res.status(500).json(gardenFindErr);
-   }
- 
-   // create new garden based on user using subdocuments
-
-   // gardens, not a function
-   // Gardens, cannot read property 'create' of undefined
-   // garden, cannot read property 'create' of undefined
-   // Garden, cannot read property 'create' of undefined
-   // gardens
-   const newGarden = userProfile.gardens.create(req.body);
- 
-   return User.findOneAndUpdate(
-     {
-       _id: req.user._id
-     
-     },
-     {
-       $addToSet: { gardens: newGarden }
-     },
-     {
-       new: true
-     }
-   )
-     .then(userInfo => {
-       if (userInfo !== null) {
-         return res.json(userInfo);
-       }
-       
-       console.log(userInfo);
-
-       return res.json({
-         message: 'Link already saved'
-       });
-     })
-     .catch(err => {
-       console.log(err);
-       return res.json(err);
+   db.Garden.create(req.body)
+    .then((dbGarden) => {
+      
+      return db.User.findOneAndUpdate({
+        username: req.user.username
+     }, 
+     { 
+       $push: { gardens: dbGarden._id } 
+     }, 
+     { 
+       new: true 
      });
- };
+    })
+    .then((dbUser) => {
+      // If the User was updated successfully, send it back to the client
+      res.json(dbUser);
+    })
+    .catch((err) => {
+      // If an error occurs, send it back to the client
+      res.json(err);
+    });
+ }
+
+
+
+
 
  module.exports = {
     addGarden,
