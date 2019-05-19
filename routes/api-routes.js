@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 
 const { getUser, addGarden, getUserGardens } = require("../controllers/gardenController");
 
+const { getWeatherData } = require("../controllers/weatherController");
+
 const db = require("../models")
 
 const authCheck = (req, res, next) => {
@@ -21,6 +23,10 @@ router.get("/user", authCheck, getUser);
 router.post("/user", authCheck, addGarden);
 
 router.get("/gardens", authCheck, getUserGardens);
+
+router.get("/weather", getWeatherData);
+
+
 
 
 
