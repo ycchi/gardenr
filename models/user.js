@@ -7,42 +7,42 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 // create subDocument for modeling plants in the garden
-const PlantSchema = new Schema({
-   name: {
-      type: String,
-      required: true
-   },
-   plantedDate: {
-      type: Date,
-      required: true,
-   },
-   lastWaterDate: {
-      type: Date
-   },
-   nextWaterDate: {
-      type: Date
-   },
-   comments: {
-      type: String
-   }
-});
+// const PlantSchema = new Schema({
+//    name: {
+//       type: String,
+//       required: true
+//    },
+//    plantedDate: {
+//       type: Date,
+//       required: true,
+//    },
+//    lastWaterDate: {
+//       type: Date
+//    },
+//    nextWaterDate: {
+//       type: Date
+//    },
+//    comments: {
+//       type: String
+//    }
+// });
 
-// create subDocument for modeling plants in the garden
-const GardenSchema = new Schema({
-   name: {
-      type: String,
-      required: true
-   },
-   // location datatype
-   location: {
-      type: String,
-      required: true,
-   },
-   plantedDate: {
-      type: String
-   },
-   plants: [PlantSchema]
-});
+// // create subDocument for modeling plants in the garden
+// const GardenSchema = new Schema({
+//    name: {
+//       type: String,
+//       required: true
+//    },
+//    // location datatype
+//    location: {
+//       type: String,
+//       required: true,
+//    },
+//    plantedDate: {
+//       type: String
+//    },
+//    plants: [PlantSchema]
+// });
 
 
 const UserSchema = new Schema({

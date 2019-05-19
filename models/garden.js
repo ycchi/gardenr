@@ -5,23 +5,13 @@ const { Schema } = mongoose;
 
 
 // create subDocument for modeling plants in the garden
-const PlantSchema = new Schema({
-   name: {
-      type: String,
-      required: true
-   },
-   plantedDate: {
+const LogSchema = new Schema({
+   logDate: {
       type: Date,
       required: true,
    },
-   lastWaterDate: {
+   logBody: {
       type: Date
-   },
-   nextWaterDate: {
-      type: Date
-   },
-   comments: {
-      type: String
    }
 });
 
@@ -39,7 +29,7 @@ const GardenSchema = new Schema({
    plantedDate: {
       type: String
    },
-   plants: [PlantSchema]
+   logs: [LogSchema]
 });
 
 const Garden = mongoose.model("Garden", GardenSchema);
