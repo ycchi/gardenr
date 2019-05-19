@@ -68,6 +68,36 @@ const addGarden = (req, res) => {
      });
  };
 
+// POST garden '/api/gardens'
+const addLog = (req, res) => {
+
+  
+  console.log(`RUNNING: addLog`);
+
+   db.User.Garden.create(req.body)
+    .then((dbGarden) => {
+      
+      return db.User.findOneAndUpdate({
+        username: req.user.username
+     }, 
+     { 
+      $push: { gardens: dbGarden._id } 
+      // $push: { gardens: dbGarden.name } 
+     }, 
+     { 
+       new: true 
+     });
+    })
+    .then((dbUser) => {
+      // If the User was updated successfully, send it back to the client
+      res.json(dbUser);
+    })
+    .catch((err) => {
+      // If an error occurs, send it back to the client
+      res.json(err);
+    });
+ }
+
 
  module.exports = {
     addGarden,

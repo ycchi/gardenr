@@ -33,5 +33,9 @@ const GardenSchema = new Schema({
 });
 
 const Garden = mongoose.model("Garden", GardenSchema);
+const Log = mongoose.model("Log", LogSchema);
 
+// did not work when exporting as an object: {Garden}
+// error when second exports were stated.. 
+// only allows one model per export?
 module.exports = Garden;
