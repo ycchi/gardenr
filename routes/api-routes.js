@@ -25,7 +25,7 @@ router.post("/user", authCheck, addGarden);
 router.get("/gardens", authCheck, getUserGardens);
 router.delete("/gardens", authCheck, deletePlant)
 
-router.get("/weather", authCheck, getWeatherData);
+router.get("/weather",  getWeatherData);
 
 router.get("/gardens/logs", authCheck, addLog)
 
