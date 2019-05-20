@@ -40,7 +40,7 @@ app.set('view engine', 'handlebars');
 
 
 // set up database info
-const mongoUri = process.env.MONGODB_URI || 'mongodb://user:test123@ds157956.mlab.com:57956/heroku_bf2lz14j';
+const mongoUri = process.env.MONGODB_URI || 'mongodb://user:test123@ds157956.mlab.com:57956/heroku_1cpm4g65';
 // const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost/gardenr';
 mongoose.Promise = Promise;
 mongoose.connect(mongoUri, {
