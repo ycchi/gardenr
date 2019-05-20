@@ -1,0 +1,44 @@
+<nav>
+   <ul>
+      <li><a href="/auth/logout">Logout</a></li>
+
+      <li><a href="/">Homepage</a></li>
+   </ul>
+</nav>
+<header>
+   {{#if loggedIn}}
+   <div class="container">
+   <h1>you are logged in.</h1>
+   <p>your username is: {{username}}</p>
+   </div>
+   {{/if}}
+</header>
+<main>
+   {{#unless loggedIn}}
+   <a class="google-btn" href="/auth/google">Google</a>
+   {{/unless}}
+
+   
+   <div class="container">
+
+   <a href="/profile/gardens">Add / Remove Plants</a>
+   
+
+   <br>
+   <hr>
+
+   <h1>Do I need to water the garden today?</h1>
+   <ul id="weather-section"></ul>
+
+   <br>
+   <hr>
+       
+   <h1>Plants</h1>
+   <ul id="gardens-section" class="list-group"></ul>
+   </div>
+
+
+
+</main>
+
+<script src="../assets/js/app.js"></script>

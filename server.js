@@ -4,8 +4,7 @@ const cookieSession = require("cookie-session");
 const passport = require("passport");
 const mongoose = require('mongoose');
 const exphbs = require('express-handlebars');
-const authRoutes = require('./routes/auth-routes')
-const profileRoutes = require('./routes/profile-routes')
+
 // eslint-disable-next-line no-unused-vars
 const passportConfig = require('./config/passport');
 
@@ -49,13 +48,16 @@ mongoose.connect(mongoUri, {
    console.log(`CONNECTED TO MONGODB`)
 });
 
+// set up routes
+const routes = require("./routes");
 
-app.use("/auth", authRoutes);
-app.use("/profile", profileRoutes);
+app.use(routes); 
+
+
 
 
 // set up routes
-// placeholder for main..
+
 app.get("/", (req, res) =>{
   res.render('index')
 });
