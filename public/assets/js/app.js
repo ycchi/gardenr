@@ -52,9 +52,26 @@ function addGarden(e) {
    for(let i = 0; i < gardenData.gardens.length; i++){
       $("<li>")
          .append(`<b>${gardenData.gardens[i].name}</b>`)
+         .append(`<button class="delete-plant" data-id="${gardenData.gardens[i]._id}">Remove</button>`)
          .appendTo($gardensSection)
    }
  }
+
+
+
+function removePlant() {
+  const plantId = $(this).attr("data-id");
+  
+  $.ajax({
+    url: `/api/gardens`,
+    method: "DELETE",
+    data: {
+      _id: plantId
+    }
+  })
+  .then(() => location.reload())
+  .catch(err => console.log(err))
+}
 
 
 
@@ -62,5 +79,6 @@ function addGarden(e) {
  $(document).ready(function() {
    getGardenData();
    $('#add-garden-form').on('submit', addGarden);
+   $('.delete-plant').on('click', removePlant)
    
  });

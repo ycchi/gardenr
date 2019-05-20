@@ -23,7 +23,7 @@ router.get("/user", authCheck, getUser);
 router.post("/user", authCheck, addGarden);
 
 router.get("/gardens", authCheck, getUserGardens);
-router.get("/gardens", authCheck, deletePlant)
+router.delete("/gardens", authCheck, deletePlant)
 
 router.get("/weather", authCheck, getWeatherData);
 

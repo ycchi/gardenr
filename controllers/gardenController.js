@@ -71,6 +71,8 @@ const addGarden = (req, res) => {
 
 // DELETE plant
 function deletePlant (req, res) {
+  console.log(`RUNNING: deletePlant`)
+  console.log(req.body)
   db.Garden.deleteOne({name: req.user.garden.name})
   .then((dbGarden) => res.json(dbGarden))
   .catch(err => res.json(err))
