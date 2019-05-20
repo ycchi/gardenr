@@ -68,6 +68,15 @@ const addGarden = (req, res) => {
      });
  };
 
+
+// DELETE plant
+function deletePlant (req, res) {
+  db.Garden.deleteOne({name: req.user.garden.name})
+  .then((dbGarden) => res.json(dbGarden))
+  .catch(err => res.json(err))
+}
+
+
 // POST garden '/api/gardens'
 const addLog = (req, res) => {
 
@@ -102,5 +111,6 @@ const addLog = (req, res) => {
     addGarden,
     getUser,
     getUserGardens,
-    addLog
+    addLog,
+    deletePlant
  }
