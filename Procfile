@@ -1,1 +1,1 @@
-web: node server.jsher
+web: node server.js
