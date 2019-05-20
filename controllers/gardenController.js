@@ -71,26 +71,25 @@ const addGarden = (req, res) => {
 // POST garden '/api/gardens'
 const addLog = (req, res) => {
 
-  
   console.log(`RUNNING: addLog`);
 
-   db.User.Garden.create(req.body)
-    .then((dbGarden) => {
+   db.Log.create(req.body)
+    .then((dbLog) => {
       
-      return db.User.findOneAndUpdate({
-        username: req.user.username
+      return db.Garden.findOneAndUpdate({
+        name: req.Garden.name
      }, 
      { 
-      $push: { gardens: dbGarden._id } 
+      $push: { logs: dbLog_id } 
       // $push: { gardens: dbGarden.name } 
      }, 
      { 
        new: true 
      });
     })
-    .then((dbUser) => {
+    .then((dbGarden) => {
       // If the User was updated successfully, send it back to the client
-      res.json(dbUser);
+      res.json(dbGarden);
     })
     .catch((err) => {
       // If an error occurs, send it back to the client
@@ -102,5 +101,6 @@ const addLog = (req, res) => {
  module.exports = {
     addGarden,
     getUser,
-    getUserGardens
+    getUserGardens,
+    addLog
  }

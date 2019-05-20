@@ -12,6 +12,12 @@ const LogSchema = new Schema({
    },
    logBody: {
       type: Date
+   },
+   rainTotal: {
+      type: Number
+   },
+   avgTemp: {
+      type: Number
    }
 });
 

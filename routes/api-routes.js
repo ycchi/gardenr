@@ -2,7 +2,7 @@
 const router = require("express").Router();
 const mongoose = require("mongoose");
 
-const { getUser, addGarden, getUserGardens } = require("../controllers/gardenController");
+const { getUser, addGarden, getUserGardens, addLog } = require("../controllers/gardenController");
 
 const { getWeatherData } = require("../controllers/weatherController");
 
@@ -24,9 +24,9 @@ router.post("/user", authCheck, addGarden);
 
 router.get("/gardens", authCheck, getUserGardens);
 
-router.get("/weather", getWeatherData);
+router.get("/weather", authCheck, getWeatherData);
 
-
+router.get("/gardens/logs", authCheck, addLog)
 
 
 
