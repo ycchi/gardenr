@@ -39,24 +39,22 @@ const weatherObj = {
 // GET request to weather API and send to /api/weather
 const getWeatherData = (req, res) => {
    axios.all([
-
-      axios.get("http://localhost:3000/api/gardens"),
       
-      axios.get(`http://api.apixu.com/v1/history.json?key=c8f2ed219aad4fe595204455191805&q=07013&dt=${moment().subtract(0, 'days').format("YYYY-MM-DD")}
+      axios.get(`https://api.apixu.com/v1/history.json?key=c8f2ed219aad4fe595204455191805&q=07013&dt=${moment().subtract(0, 'days').format("YYYY-MM-DD")}
       `),
-      axios.get(`http://api.apixu.com/v1/history.json?key=c8f2ed219aad4fe595204455191805&q=07013&dt=${moment().subtract(1, 'days').format("YYYY-MM-DD")}
+      axios.get(`https://api.apixu.com/v1/history.json?key=c8f2ed219aad4fe595204455191805&q=07013&dt=${moment().subtract(1, 'days').format("YYYY-MM-DD")}
       `),          
-      axios.get(`http://api.apixu.com/v1/history.json?key=c8f2ed219aad4fe595204455191805&q=07013&dt=${moment().subtract(2, 'days').format("YYYY-MM-DD")}
+      axios.get(`https://api.apixu.com/v1/history.json?key=c8f2ed219aad4fe595204455191805&q=07013&dt=${moment().subtract(2, 'days').format("YYYY-MM-DD")}
       `),
-      axios.get(`http://api.apixu.com/v1/history.json?key=c8f2ed219aad4fe595204455191805&q=07013&dt=${moment().subtract(3, 'days').format("YYYY-MM-DD")}
+      axios.get(`https://api.apixu.com/v1/history.json?key=c8f2ed219aad4fe595204455191805&q=07013&dt=${moment().subtract(3, 'days').format("YYYY-MM-DD")}
       `),
-      axios.get(`http://api.apixu.com/v1/history.json?key=c8f2ed219aad4fe595204455191805&q=07013&dt=${moment().subtract(3, 'days').format("YYYY-MM-DD")}
+      axios.get(`https://api.apixu.com/v1/history.json?key=c8f2ed219aad4fe595204455191805&q=07013&dt=${moment().subtract(3, 'days').format("YYYY-MM-DD")}
       `),
-      axios.get(`http://api.apixu.com/v1/history.json?key=c8f2ed219aad4fe595204455191805&q=07013&dt=${moment().subtract(4, 'days').format("YYYY-MM-DD")}
+      axios.get(`https://api.apixu.com/v1/history.json?key=c8f2ed219aad4fe595204455191805&q=07013&dt=${moment().subtract(4, 'days').format("YYYY-MM-DD")}
       `),
-      axios.get(`http://api.apixu.com/v1/history.json?key=c8f2ed219aad4fe595204455191805&q=07013&dt=${moment().subtract(5, 'days').format("YYYY-MM-DD")}
+      axios.get(`https://api.apixu.com/v1/history.json?key=c8f2ed219aad4fe595204455191805&q=07013&dt=${moment().subtract(5, 'days').format("YYYY-MM-DD")}
       `),
-      axios.get(`http://api.apixu.com/v1/history.json?key=c8f2ed219aad4fe595204455191805&q=07013&dt=${moment().subtract(6, 'days').format("YYYY-MM-DD")}
+      axios.get(`https://api.apixu.com/v1/history.json?key=c8f2ed219aad4fe595204455191805&q=07013&dt=${moment().subtract(6, 'days').format("YYYY-MM-DD")}
       `)
       // ,
       // axios.get(`http://api.apixu.com/v1/history.json?key=c8f2ed219aad4fe595204455191805&q=07013&dt=${moment().subtract(7, 'days').format("YYYY-MM-DD")}
@@ -64,7 +62,7 @@ const getWeatherData = (req, res) => {
    ]
       
    )
-     .then(axios.spread((resZip, res0, res1, res2, res3, res4, res5, res6) => {  
+     .then(axios.spread((res0, res1, res2, res3, res4, res5, res6) => {  
    
 
          // get precipitation total and push to array

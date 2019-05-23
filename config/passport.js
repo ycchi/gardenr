@@ -23,6 +23,7 @@ passport.deserializeUser((id, done) => {
 passport.use(
    new GoogleStrategy({
       // options for the google strategy
+      // change URL when deploying
       callbackURL: "/auth/google/redirect",
       clientID: process.env.GoogleClientID,
       clientSecret: process.env.GoogleClientSecret
