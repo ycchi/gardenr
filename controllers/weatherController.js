@@ -38,6 +38,9 @@ const weatherObj = {
 
 // GET request to weather API and send to /api/weather
 const getWeatherData = (req, res) => {
+
+   console.log(`RUNNING: getWeatherData`)
+
    axios.all([
       
       axios.get(`https://api.apixu.com/v1/history.json?key=c8f2ed219aad4fe595204455191805&q=07013&dt=${moment().subtract(0, 'days').format("YYYY-MM-DD")}
