@@ -42,8 +42,8 @@ app.set('view engine', 'handlebars');
 
 
 // set up database info
-const mongoUri = 'mongodb://user:password1@ds261296.mlab.com:61296/heroku_bc54bth6' || process.env.MONGODB_URI;
-// const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost/gardenr';
+// const mongoUri = 'mongodb://user:password1@ds261296.mlab.com:61296/heroku_bc54bth6' || process.env.MONGODB_URI || 'mongodb://localhost/gardenr';
+const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost/gardenr';
 mongoose.Promise = Promise;
 mongoose.connect(mongoUri, {
   useNewUrlParser: true
