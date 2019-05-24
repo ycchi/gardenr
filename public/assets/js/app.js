@@ -61,7 +61,7 @@ function addGarden(e) {
 
 function removePlant() {
   const plantId = $(this).attr("data-id");
-  
+  console.log(`RUNNING: removePlant`)
   $.ajax({
     url: `/api/gardens`,
     method: "DELETE",

@@ -7,10 +7,17 @@ router.get("/login", (req, res) => {
 })
 
 // auth log out google
-router.get("/logout", (req, res) => {
+router.get("/logout", async (req, res) => {
    // handle with passport
-    req.logout(); 
-    res.redirect("/");
+   //  req.logout();
+   //  req.session = null
+   //  res.redirect("/")
+   
+    await req.logout()
+    req.session = null
+    req.sessionOptions.maxAge = 0
+    return res.redirect('/')
+    
 })
 
 
