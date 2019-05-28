@@ -2,11 +2,11 @@
 const router = require("express").Router();
 const mongoose = require("mongoose");
 
-const { getUser, addGarden, getUserGardens, addLog, deletePlant } = require("../controllers/gardenController");
+const { getPlants, getPlantById, addPlant, updatePlant, deletePlant } = require("../controllers/plantController");
 
 const { getWeatherData } = require("../controllers/weatherController");
 
-const db = require("../models")
+
 
 const authCheck = (req, res, next) => {
    if(!req.user){
@@ -19,15 +19,23 @@ const authCheck = (req, res, next) => {
 };
 
 
-router.get("/user", authCheck, getUser);
-router.post("/user", authCheck, addGarden);
+// router.get("/user", authCheck, getUser);
+// router.post("/user", authCheck, addGarden);
+// router.get("/gardens", authCheck, getUserGardens);
+// router.delete("/gardens", authCheck, deletePlant)
+// router.get("/gardens/logs", authCheck, addLog)
 
-router.get("/gardens", authCheck, getUserGardens);
-router.delete("/gardens", authCheck, deletePlant)
+
+// router.get("/user", authCheck, getUserPlants);
 
 router.get("/weather",  getWeatherData);
 
-router.get("/gardens/logs", authCheck, addLog)
+
+router.get("/plants", authCheck, getPlants);
+router.get("/plants/:id", authCheck, getPlantById);
+router.post("/plants", authCheck, addPlant);
+router.put("/plants/:id", authCheck, updatePlant);
+router.delete("/plants/:id", authCheck, deletePlant);
 
 
 

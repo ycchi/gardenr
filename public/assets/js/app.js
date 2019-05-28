@@ -1,24 +1,23 @@
  console.log(`frontend app.js running`)
  
  // get reference to section on page
- const $gardensSection = $("#gardens-section");
+ const $plantSection = $("#plant-section");
 
-// function to add a garden
-function addGarden(e) {
+// function to add a Plant
+function addPlant(e) {
    
-
-   const gardenData = {
-      name: $("#garden-name").val().trim(),
-      location: $("#garden-location").val().trim(),
+   const plantData = {
+      name: $("#plant-name").val().trim(),
+      location: $("#plant-location").val().trim(),
       plantedDate: $("#planted-date").val().trim()
    }
  
-   console.log(gardenData)
+   console.log(plantData)
 
    $.ajax({
-     url: '/api/user',
+     url: '/api/plants',
      method: 'post',
-     data: gardenData,
+     data: plantData,
    })
      .then(function(response) {
        console.log(response);
@@ -30,44 +29,46 @@ function addGarden(e) {
  }
 
 
- // function to GET gardens from 'api/gardens'
- function getGardenData () {
+ // function to GET plants from 'api/plants'
+ function getPlantData () {
     $.ajax({
-       url: '/api/gardens',
+       url: '/api/plants',
        method: 'GET'
     })
-      .then(printGardens)
+      .then(printPlants)
       .catch(err => {
          console.log(err);
       });
  }
 
 
-// function to print gardenData to page
- function printGardens (gardenData) {
-   $gardensSection.empty();
-   console.log(`RUNNING: printGardens `)
-   console.log(`gardenData: ${gardenData._id}`)
+// function to print plantData to page
+ function printPlants (plantData) {
+   $plantSection.empty();
+   console.log(`RUNNING: printPlants `)
+   console.log(`plantData: ${plantData}`)
+   console.log(JSON.stringify(plantData))
 
-   for(let i = 0; i < gardenData.gardens.length; i++){
+   for(let i = 0; i < plantData.plants.length; i++){
       $("<li>")
-         .append(`<b>${gardenData.gardens[i].name}</b>`)
-         .append(`<button class="delete-plant" data-id="${gardenData.gardens[i]._id}">Remove</button>`)
-         .appendTo($gardensSection)
+         .append(`<b>${plantData.plants[i].name}</b>`)
+         .append(`<button class="delete-plant" data-id="${plantData.plants[i]._id}">Remove</button>`)
+         .appendTo($plantSection)
    }
  }
 
 
 
 function removePlant() {
+
   const plantId = $(this).attr("data-id");
   console.log(`RUNNING: removePlant`)
   $.ajax({
-    url: `/api/gardens`,
-    method: "DELETE",
-    data: {
-      _id: plantId
-    }
+    url: `/api/plants/${plantId}`,
+    method: "DELETE"
+    // data: {
+    //   _id: plantId
+    // }
   })
   .then(() => location.reload())
   .catch(err => console.log(err))
@@ -77,8 +78,9 @@ function removePlant() {
 
 
  $(document).ready(function() {
-   getGardenData();
-   $('#add-garden-form').on('submit', addGarden);
-   $('.delete-plant').on('click', removePlant)
+   getPlantData();
+   $('#add-plant-form').on('submit', addPlant);
+  //  $('.delete-plant').on('click', removePlant)
+   $(document).on('click', ".delete-plant", removePlant)
    
  });

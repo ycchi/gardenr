@@ -1,10 +1,10 @@
 
 const User = require("./user")
-const Garden = require("./garden")
-const Log = require("./garden")
+const Plant = require("./plant")
+const Log = require("./log")
 
 module.exports = {
    User,
-   Garden,
+   Plant,
    Log
  };

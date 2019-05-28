@@ -4,30 +4,19 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 
-// create subDocument for modeling plants in the garden
-const LogSchema = new Schema({
-   logDate: {
-      type: Date,
-      required: true,
-   },
-   logBody: {
-      type: Date
-   },
-   rainTotal: {
-      type: Number
-   },
-   avgTemp: {
-      type: Number
-   }
-});
+
 
 // create subDocument for modeling plants in the garden
-const GardenSchema = new Schema({
+const PlantSchema = new Schema({
+
    name: {
       type: String,
       required: true
    },
-   // location datatype
+   ownerId: {
+      type: String,
+   },
+   
    location: {
       type: String,
       required: true,
@@ -35,13 +24,18 @@ const GardenSchema = new Schema({
    plantedDate: {
       type: String
    },
-   logs: [LogSchema]
+   logs: [
+      {
+         type: Schema.Types.ObjectId,
+         ref: "Log"
+      }
+   ]
 });
 
-const Garden = mongoose.model("Garden", GardenSchema);
-const Log = mongoose.model("Log", LogSchema);
+const Plant = mongoose.model("Plant", PlantSchema);
+
 
 // did not work when exporting as an object: {Garden}
 // error when second exports were stated.. 
 // only allows one model per export?
-module.exports = Garden;
+module.exports = Plant;
