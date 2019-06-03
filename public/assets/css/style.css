@@ -1,0 +1,61 @@
+.wrapper {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 20% 40% 40%;
+  grid-template-areas:
+    "sidebar  jumbotron  jumbotron"
+    "sidebar jumbotron jumbotron"
+    "sidebar  content  content"
+    "sidebar  content  content";
+  background-color: #fff;
+  color: #444;
+}
+
+
+.sidebar {
+  grid-area: sidebar;
+  background-color: #444;
+  color: #fff;
+  border-radius: 5px;
+  //padding: 50px;
+  font-size: 100%;
+}
+
+.jumbotron {
+  grid-area: jumbotron;
+  background-color: #444;
+  color: #fff;
+  border-radius: 5px;
+  padding: 50px;
+  font-size: 150%;
+
+}
+
+.content {
+  grid-area: content;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 50% 50%;
+  grid-template-areas: 
+    "a b"
+    "c d";
+  background-color: gray;
+
+}
+
+/* .card {
+  background-color: #444;
+  color: #fff;
+  border-radius: 5px;
+  // padding: 50px;
+  font-size: 150%;
+} */
+
+.a {
+  grid-area: a;
+}
+
+.b {
+  grid-area: b;
+}
+

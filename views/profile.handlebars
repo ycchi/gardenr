@@ -1,42 +1,54 @@
-<nav>
-   <ul>
-      <li><a href="/auth/logout">Logout</a></li>
-
-      <li><a href="/">Homepage</a></li>
-   </ul>
-</nav>
-<header>
-   {{#if loggedIn}}
-   <div class="container">
-   <h1>you are logged in.</h1>
-   <p>your username is: {{username}}</p>
-   </div>
-   {{/if}}
-</header>
 <main>
-   {{#unless loggedIn}}
-   <a class="google-btn" href="/auth/google">Google</a>
-   {{/unless}}
+   {{!-- New Layout --}}
+   <div class="wrapper container">
+      <div class="sidebar">
+         <div class=" sidebar-header d-flex justify-content-center">
+            <h1 class="display-5">GARDENR</h1>
+         </div>
 
-   
-   <div class="container">
+         <div class="card text-dark user-info mb-3">
+            <img class="card-img-top" src="https://via.placeholder.com/150" alt="User Profile Image">
+            <div class="card-body" bis_skin_checked="1">Welcome back {{username}}</div>
+            <button type="button" class="btn btn-success" onclick="window.location.href = '/auth/logout';">Logout</button>
 
-   
-   
+            
+         </div>
 
-   <br>
-   <hr>
+         <div class="card text-dark plant-list">
+            <h4 class="card-header">Your Plants</h4>
+            <div class="list-group list-group-flush">
+               <a href="#" class="list-group-item list-group-item-action">
+                  Cras justo odio
+               </a>
+               <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+               <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+               <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
+               <a href="#" class="list-group-item list-group-item-action disabled">Vestibulum at eros</a>
+            </div>
+            
+             <button type="button" class="btn btn-success" onclick="window.location.href = '/profile/gardens';">Add/Remove Plant</button>
+             
+         </div>
+      </div>
+      <div class="jumbotron">
+         jumbotron
+      </div>
 
-   <h1>Does my garden need water today?</h1>
-   <ul id="weather-section"></ul>
+      <div class="content">
+         <div class="card a">card a</div>
+         <div class="card b">card b</div>
+         <div class="card c">card c</div>
+         <div class="card d">card d</div>
+      </div>
 
-   <br>
-   <hr>
-       
-   <h1>Plants</h1>
-   <a href="/profile/gardens">Add / Remove Plants</a>
-   <ul id="gardens-section" class="list-group"></ul>
    </div>
+
+
+
+
+
+
+
 
 
 

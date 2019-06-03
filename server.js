@@ -4,6 +4,7 @@ const cookieSession = require("cookie-session");
 const passport = require("passport");
 const mongoose = require('mongoose');
 const exphbs = require('express-handlebars');
+const path = require('path');
 
 // eslint-disable-next-line no-unused-vars
 const passportConfig = require('./config/passport');
@@ -33,7 +34,8 @@ app.use(passport.session());
 // set up middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static('public'));
+// app.use(express.static('public'));
+app.use(express.static(path.join(__dirname,'/public')));
 
 
 // set up templating engine
