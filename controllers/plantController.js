@@ -31,7 +31,6 @@ const getPlantById = (req, res) => {
   req.user._id: ${req.user._id}`)
   console.log(`req.params.id: ${req.params.id}`)
 
-  // find user first
   Plant.findOne({_id: req.params.id})
     .populate("logs")
     .then((dbPlantData) => {
