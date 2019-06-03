@@ -1,37 +1,48 @@
 <main>
-   {{!-- New Layout --}}
+
+
+
+
+
    <div class="wrapper container">
-      <div class="sidebar">
-         <div class=" sidebar-header d-flex justify-content-center">
-            <h1 class="display-5">GARDENR</h1>
-         </div>
-
-         <div class="card text-dark user-info mb-3">
-            <img class="card-img-top" src="https://via.placeholder.com/150" alt="User Profile Image">
-            <div class="card-body" bis_skin_checked="1">Welcome back {{username}}</div>
-            <button type="button" class="btn btn-success" onclick="window.location.href = '/auth/logout';">Logout</button>
-
+      <nav class="navbar sticky-top navbar-light bg-light flex-fill">
+         <a class="navbar-brand" href="#">GARDENR</a>
+         <ul class="nav justify-content-end">
+            <li class="nav-item">
+               <span class="navbar-text">
+                  Welcom back {{username}}
+               </span>
+            </li>
             
-         </div>
+            <li class="nav-item">
+               <a class="nav-link text-dark" href="/auth/logout"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+            </li>
+         </ul>
+
+
+
+
+
+      </nav>
+
+
+      <div class="sidebar">
+         
 
          <div class="card text-dark plant-list">
             <h4 class="card-header">Your Plants</h4>
-            <div class="list-group list-group-flush">
-               <a href="#" class="list-group-item list-group-item-action">
-                  Cras justo odio
-               </a>
-               <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
-               <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
-               <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
-               <a href="#" class="list-group-item list-group-item-action disabled">Vestibulum at eros</a>
+            <div class="list-group list-group-flush" id="plant-section">
+
             </div>
-            
-             <button type="button" class="btn btn-success" onclick="window.location.href = '/profile/gardens';">Add/Remove Plant</button>
-             
+
+            <button type="button" class="btn btn-success"
+               onclick="window.location.href = '/profile/gardens';">Add/Remove Plant</button>
+
          </div>
       </div>
       <div class="jumbotron">
-         jumbotron
+         <div id="loadingMessage"></div>
+         <canvas id="myChart"></canvas>
       </div>
 
       <div class="content">
@@ -53,5 +64,3 @@
 
 
 </main>
-
-<script src="../assets/js/app.js"></script>

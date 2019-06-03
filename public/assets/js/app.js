@@ -50,9 +50,11 @@
    console.log(JSON.stringify(plantData))
 
    for (let i = 0; i < plantData.plants.length; i++) {
-     $("<li>")
-       .append(`<b>${plantData.plants[i].name}</b>`)
-       .append(`<button class="delete-plant" data-id="${plantData.plants[i]._id}">Remove</button>`)
+     $("<a>")
+      .addClass(`list-group-item list group-item-action text-dark`)
+      .text(`${plantData.plants[i].name}`)
+      .attr("href", "#")
+      //  .append(`<button class="delete-plant" data-id="${plantData.plants[i]._id}">Remove</button>`)
        .appendTo($plantSection)
    }
  }

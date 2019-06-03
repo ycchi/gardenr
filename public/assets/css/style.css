@@ -3,19 +3,22 @@
   grid-gap: 10px;
   grid-template-columns: 20% 40% 40%;
   grid-template-areas:
-    "sidebar  jumbotron  jumbotron"
-    "sidebar jumbotron jumbotron"
+    "navbar navbar navbar"
+    "jumbotron jumbotron  jumbotron"
+    "jumbotron jumbotron jumbotron"
     "sidebar  content  content"
     "sidebar  content  content";
   background-color: #fff;
   color: #444;
 }
 
+.navbar {
+  grid-area: navbar;
+}
 
 .sidebar {
   grid-area: sidebar;
-  background-color: #444;
-  color: #fff;
+  
   border-radius: 5px;
   //padding: 50px;
   font-size: 100%;
@@ -23,10 +26,10 @@
 
 .jumbotron {
   grid-area: jumbotron;
-  background-color: #444;
-  color: #fff;
+  border-style: dashed;
+  
   border-radius: 5px;
-  padding: 50px;
+  min-height: 40vh;
   font-size: 150%;
 
 }
