@@ -12,8 +12,8 @@ function convertInches(degree) {
    return result;
 }
 
-const weatherObj = {
-   zipCode: "",
+let weatherObj = {
+   zipCode: "07013",
    dateRange: [],
    rainArr: [],
    avgTemp: []
@@ -40,6 +40,14 @@ const weatherObj = {
 const getWeatherData = (req, res) => {
 
    console.log(`RUNNING: getWeatherData`)
+
+   // empty weatherObj
+   weatherObj = {
+      zipCode: "07013",
+      dateRange: [],
+      rainArr: [],
+      avgTemp: []
+   }
 
    axios.all([
       
@@ -92,6 +100,11 @@ const getWeatherData = (req, res) => {
 
          // get date range
          weatherObj.dateRange.push(res6.data.forecast.forecastday[0].date);
+         weatherObj.dateRange.push(res5.data.forecast.forecastday[0].date);
+         weatherObj.dateRange.push(res4.data.forecast.forecastday[0].date);
+         weatherObj.dateRange.push(res3.data.forecast.forecastday[0].date);
+         weatherObj.dateRange.push(res2.data.forecast.forecastday[0].date);
+         weatherObj.dateRange.push(res1.data.forecast.forecastday[0].date);
          weatherObj.dateRange.push(res0.data.forecast.forecastday[0].date);
          
      }))

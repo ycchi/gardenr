@@ -1,31 +1,8 @@
 
-var labels = [
-   "sunday",
-   "monday",
-   "tuesday",
-   "wednesday",
-   "thursday",
-   "friday",
-   "saturday"
-];
-var revenues = [
-   20000,
-   14000,
-   12000,
-   15000,
-   18000,
-   19000,
-   22000
-];
-var clients = [
-   201,
-   140,
-   80,
-   150,
-   190,
-   170,
-   202
-];
+let labels = [];
+let avgTemp = [];
+
+let rainArr = [];
 
 
 function renderChart() {
@@ -37,18 +14,18 @@ function renderChart() {
        datasets: [
            {
                type: 'line',
-               label: "Revenues",
-               data: revenues,
-               borderColor: 'rgba(75, 192, 192, 1)',
+               label: "Temperature",
+               data: avgTemp,
+               borderColor: 'rgba(191, 63, 63, 1)',
                backgroundColor: 'rgba(0, 0, 0, 0)',
-               yAxisID: 'revenues',
+               yAxisID: 'temperature',
            },
            {
-               label: "Clients",
-               data: clients,
+               label: "Rain",
+               data: rainArr,
                borderColor: 'rgba(0, 0, 0, 0)',
-               backgroundColor: 'rgba(192, 75, 192, 0.5)',
-               yAxisID: 'clients',
+               backgroundColor: 'rgba(75, 192, 192, 1)',
+               yAxisID: 'rain',
            }
        ]
    },
@@ -56,24 +33,24 @@ function renderChart() {
        scales: {
            yAxes: [
                {
-                   id: "revenues",
+                   id: "temperature",
                    ticks: {
-                       beginAtZero: true,
+                       beginAtZero: false,
                    },
                    scaleLabel: {
                        display: true,
-                       labelString: 'Revenues (U$)'
+                       labelString: 'Temperature (F)'
                      }
                },
                {
-                   id: "clients",
+                   id: "rain",
                    position: 'right',
                    ticks: {
                        beginAtZero: true,
                    },
                    scaleLabel: {
                        display: true,
-                       labelString: 'Clients'
+                       labelString: 'Rain (Inches)'
                      }
                },
            ]
@@ -93,14 +70,16 @@ function getChartData() {
        url: "/api/weather",
        success: (result) => {
          console.log(`result: ${JSON.stringify(result)}`)
-         console.log(`result: ${JSON.stringify(result)}`)
+
 
            $("#loadingMessage").html("");
-           var data = [];
-           data.push(result.thisWeek);
-           data.push(result.lastWeek);
-           var labels = result.labels;
-           renderChart(data, labels);
+           
+         //   data.push(result.thisWeek);
+         //   data.push(result.lastWeek);
+           labels = result.dateRange;
+           avgTemp = result.avgTemp;
+           rainArr = result.rainArr;
+           renderChart(avgTemp, rainArr, labels);
        },
        error: function (err) {
            $("#loadingMessage").html("Error");
