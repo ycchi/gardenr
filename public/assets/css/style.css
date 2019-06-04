@@ -26,7 +26,6 @@
 
 .jumbotron {
   grid-area: jumbotron;
-  border-style: dashed;
   
   border-radius: 5px;
   min-height: 40vh;

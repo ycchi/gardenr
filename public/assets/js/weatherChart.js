@@ -93,7 +93,7 @@ function getChartData() {
        url: "/api/weather",
        success: (result) => {
          console.log(`result: ${JSON.stringify(result)}`)
-         console.log(result.rainArr);
+         console.log(`result: ${JSON.stringify(result)}`)
 
            $("#loadingMessage").html("");
            var data = [];
