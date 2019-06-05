@@ -6,7 +6,7 @@ import Landing from './pages/Landing'
 function App() {
   return (
     <Router>
-      
+        {/* <h1>APP</h1> */}
         <Landing />
     
       

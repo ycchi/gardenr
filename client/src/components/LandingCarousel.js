@@ -1,11 +1,12 @@
-import React, { Component } from './node_modules/react';
+// import React, { Component } from './node_modules/react';
+import React, { Component } from 'react';
 import {
   Carousel,
   CarouselItem,
   CarouselControl,
   CarouselIndicators,
   CarouselCaption
-} from './node_modules/reactstrap';
+} from 'reactstrap';
 
 const items = [
   {

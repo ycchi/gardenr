@@ -6,9 +6,9 @@ import { Card, CardText, CardBody,
 const Hero = (props) => {
   return (
     <div>
-      <Card>
+      <Card className="hero">
         <CardBody>
-          <CardTitle>Card title</CardTitle>
+          <CardTitle className="display-1">Gardenr</CardTitle>
           <CardSubtitle>Card subtitle</CardSubtitle>
           <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
           <Button>Login with Google</Button>

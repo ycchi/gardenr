@@ -7,9 +7,12 @@ class Landing extends Component {
    render() {
       return (
          <React.Fragment>
-            {/* <LandingCarousel />
-            <Hero /> */}
-            <h1>This is Landing page</h1>
+            <div className="landing-wrapper">
+            <LandingCarousel />
+            <Hero />
+            </div>
+            
+            
          </React.Fragment>
       )
    }
