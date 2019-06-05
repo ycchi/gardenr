@@ -1,9 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 
 // dependencies
-const { User } = require('../models/oldversion');
-const { Plant } = require('../models/oldversion');
-const { Log } = require('../models/oldversion');
+const { User } = require('../models/user');
+const { Plant } = require('../models/user');
+const { Log } = require('../models/user');
 
 
 // READ/GET logs for a specific plant

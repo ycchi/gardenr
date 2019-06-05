@@ -29,13 +29,6 @@ router.post("/plants", authCheck, addPlant);
 router.put("/plants/:id", authCheck, updatePlant);
 router.delete("/plants/:id", authCheck, deletePlant);
 
-// testing CRUD
-// router.get("/plants", getPlants);
-// router.get("/plants/:id", getPlantById);
-// router.post("/plants", addPlant);
-// router.put("/plants/:id", updatePlant);
-// router.delete("/plants/:id", deletePlant);
-
 
 
 module.exports = router

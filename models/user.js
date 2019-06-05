@@ -27,11 +27,11 @@ const PlantSchema = new Schema({
 
    specie: {
       type: String,
-      required: true
+      // required: true
    },
    nickname: {
       type: String,
-      required: true
+      // required: true
    },
    ownerId: {
       type: String,
