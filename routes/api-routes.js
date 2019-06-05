@@ -28,7 +28,7 @@ const authCheck = (req, res, next) => {
 
 // router.get("/user", authCheck, getUserPlants);
 
-router.get("/weather",  getWeatherData);
+router.get("/weather", authCheck, getWeatherData);
 
 
 router.get("/plants", authCheck, getPlants);
