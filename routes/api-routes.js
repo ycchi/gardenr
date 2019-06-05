@@ -19,23 +19,22 @@ const authCheck = (req, res, next) => {
 };
 
 
-// router.get("/user", authCheck, getUser);
-// router.post("/user", authCheck, addGarden);
-// router.get("/gardens", authCheck, getUserGardens);
-// router.delete("/gardens", authCheck, deletePlant)
-// router.get("/gardens/logs", authCheck, addLog)
-
-
-// router.get("/user", authCheck, getUserPlants);
-
 router.get("/weather", authCheck, getWeatherData);
 
+// use below for production
 
 router.get("/plants", authCheck, getPlants);
 router.get("/plants/:id", authCheck, getPlantById);
 router.post("/plants", authCheck, addPlant);
 router.put("/plants/:id", authCheck, updatePlant);
 router.delete("/plants/:id", authCheck, deletePlant);
+
+// testing CRUD
+// router.get("/plants", getPlants);
+// router.get("/plants/:id", getPlantById);
+// router.post("/plants", addPlant);
+// router.put("/plants/:id", updatePlant);
+// router.delete("/plants/:id", deletePlant);
 
 
 

@@ -1,7 +1,7 @@
+const User = require("./user");
+const Plant = require("./user");
+const Log = require("./user");
 
-const User = require("./user")
-const Plant = require("./plant")
-const Log = require("./log")
 
 module.exports = {
    User,

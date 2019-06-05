@@ -1,8 +1,10 @@
 /* eslint-disable no-underscore-dangle */
 
 // dependencies
-const { User } = require('../models');
-const { Plant } = require('../models');
+// const { User } = require('../models');
+const { User } = require('../models/user');
+const { Plant } = require('../models/user');
+
 
 
 
