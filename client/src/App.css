@@ -32,16 +32,19 @@
   }
 }
 
-.landing-wrapper{
-  position: relative;
-}
 
-.carousel {
-  z-index: -1;
-  position: relative;
+.carousel-wrapper {
+  z-index: -99;
+  position: absolute;
   left: 0px;
   top: 0px;
-  
+}
+
+.carousel .item {
+  z-index: -1;
+  position: fixed;
+  left: 0px;
+  top: 0px;
 }
 
 .carousel-item > img { 
@@ -50,8 +53,11 @@
 }
 
 .hero {
-  position: absolute;
+  margin: auto;
+  margin-top: 25vh;
   z-index: 10;
   text-align: center;
   width: 40%;
+  opacity: 0.8;
+  
 }
