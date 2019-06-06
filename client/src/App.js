@@ -1,16 +1,20 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css';
-import Landing from './pages/Landing'
+import Landing from './pages/Landing'; 
+import Garden from './pages/Garden'
 
 function App() {
   return (
-    <Router>
-        {/* <h1>APP</h1> */}
-        <Landing />
-    
-      
-    </Router>
+
+  <Router>
+    <React.Fragment>
+      <Switch>
+        <Route exact path="/" component={Landing} />
+        <Route exact path="/garden" component={Garden} />
+      </Switch>
+    </React.Fragment>
+  </Router>
   );
 }
 
