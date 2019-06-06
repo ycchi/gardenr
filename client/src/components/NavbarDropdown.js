@@ -10,7 +10,14 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem } from 'reactstrap';
+  DropdownItem, 
+  Button, 
+  Form, 
+  FormGroup, 
+  Label, 
+  Input,
+Card
+} from 'reactstrap';
 
 export default class NavbarDropdown extends React.Component {
   constructor(props) {
@@ -34,19 +41,24 @@ export default class NavbarDropdown extends React.Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink>Welcome back {this.props.username}</NavLink>
-              </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
+                Welcome back {this.props.username}
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem>
-                    Option 1
-                  </DropdownItem>
-                  <DropdownItem>
-                    Option 2
-                  </DropdownItem>
+                  
+                  
+                  <Card>
+                    <Form>
+                     <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                        <Label for="zipcode" className="mr-sm-2">Enter Garden Zipcode</Label>
+                        <Input type="text" name="zipcode" id="zipcode" placeholder="07013" />
+                     </FormGroup>
+                     <Button>Submit</Button>
+                  </Form>
+                </Card>
+
+
                   <DropdownItem divider />
                   <DropdownItem>
                      <NavLink href="http://localhost:5000/auth/logout">
