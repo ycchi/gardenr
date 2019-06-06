@@ -58,13 +58,16 @@ export default class NavbarDropdown extends React.Component {
                   
                   
                   <Card>
-                    <Form>
+                    <Form onSubmit={() => {
+                       this.props.handleFormSubmit()
+                    }}>
                      <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                        <Label for="zipcode" className="mr-sm-2">Enter Garden Zipcode</Label>
-                        <Input type="text" name="zipcode" id="zipcode" placeholder="07013" value={zipcode}
-               onChange={this.handleChange}  />
+                        <Label for="zipcode" className="mr-sm-2">Garden Zipcode</Label>
+                        <Input type="text" name="zipcode" id="zipcode" placeholder={zipcode} 
+                        value={zipcode}
+                        onChange={this.handleChange}  />
                      </FormGroup>
-                     <Button>Submit</Button>
+                     <Button type="submit">Update</Button>
                   </Form>
                 </Card>
 

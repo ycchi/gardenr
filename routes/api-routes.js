@@ -6,6 +6,8 @@ const { getPlants, getPlantById, addPlant, updatePlant, deletePlant } = require(
 
 const { getWeatherData } = require("../controllers/weatherController");
 
+const { updateUserZipcode } = require('../controllers/userController');
+
 
 
 const authCheck = (req, res, next) => {
@@ -29,6 +31,6 @@ router.post("/plants", authCheck, addPlant);
 router.put("/plants/:id", authCheck, updatePlant);
 router.delete("/plants/:id", authCheck, deletePlant);
 
+router.put("/user", authCheck, updateUserZipcode)
 
-
-module.exports = router
+module.exports = router;
