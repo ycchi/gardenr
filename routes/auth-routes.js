@@ -16,7 +16,7 @@ router.get("/logout", async (req, res) => {
     await req.logout()
     req.session = null
     req.sessionOptions.maxAge = 0
-    return res.redirect('/')
+    return res.redirect('http://localhost:3000/')
     
 })
 
