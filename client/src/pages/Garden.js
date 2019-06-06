@@ -6,10 +6,21 @@ import NavbarDropdown from '../components/NavbarDropdown';
 
 class Garden extends Component {
 
-   state = {
-      username: '',
-      plants: []
-   };
+   
+
+   constructor(props) {
+      super(props);
+      this.handleZipcodeChange = this.handleZipcodeChange.bind(this);
+      this.state = {
+         username: '',
+         plants: [],
+         zipcode: ''
+      };
+    }
+   
+   handleZipcodeChange(zipcode) {
+      this.setState({zipcode});
+    }
 
    componentDidMount() {
       this.retrieveUserData();
@@ -27,7 +38,8 @@ class Garden extends Component {
       return (
          <React.Fragment>
             <div className="container">
-            <NavbarDropdown username={this.state.username}/>
+            <NavbarDropdown username={this.state.username}
+            onZipcodeChange={this.handleZipcodeChange}/>
             <h1>THIS IS GARDEN PAGE</h1>
             
             <h1>Username: {this.state.username}</h1>

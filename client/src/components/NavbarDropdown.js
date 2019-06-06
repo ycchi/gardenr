@@ -27,13 +27,22 @@ export default class NavbarDropdown extends React.Component {
     this.state = {
       isOpen: false
     };
+    this.handleChange = this.handleChange.bind(this);
   }
+
+  handleChange(e) {
+   this.props.onZipcodeChange(e.target.value);
+ }
+
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
     });
   }
+
+
   render() {
+   const zipcode = this.props.zipcode;
     return (
       <div>
         <Navbar color="light" light expand="md">
@@ -52,7 +61,8 @@ export default class NavbarDropdown extends React.Component {
                     <Form>
                      <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                         <Label for="zipcode" className="mr-sm-2">Enter Garden Zipcode</Label>
-                        <Input type="text" name="zipcode" id="zipcode" placeholder="07013" />
+                        <Input type="text" name="zipcode" id="zipcode" placeholder="07013" value={zipcode}
+               onChange={this.handleChange}  />
                      </FormGroup>
                      <Button>Submit</Button>
                   </Form>
