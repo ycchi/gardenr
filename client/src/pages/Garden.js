@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { getUserData, updateZipcode } from '../utils/API';
+import { getUserData, updateZipcode, addPlant } from '../utils/API';
 // import NavBar from '../components/NavBar';
 import NavbarDropdown from '../components/NavbarDropdown';
+import PlantCard from '../components/PlantCard';
+import PlantForm from '../components/PlantForm';
+import { Row, Col, Button } from 'reactstrap';
 
 
 class Garden extends Component {
@@ -14,10 +17,17 @@ class Garden extends Component {
       this.state = {
          username: '',
          plants: [],
-         zipcode: ''
+         zipcode: '',
+         isHidden: true
       };
     }
    
+   toggleHidden () {
+      this.setState({
+         isHidden: !this.state.isHidden
+      })
+   }
+
    handleZipcodeChange(zipcode) {
       this.setState({zipcode});
     }
@@ -38,13 +48,13 @@ class Garden extends Component {
          })
    }
 
-   handleFormSubmit = event => {
+   handleFormSubmitZipcode = event => {
       console.log(`RUNNING: handleFormSubmit`)
       // event.preventDefault();
       const zipcode = {
          zipcode: this.state.zipcode
       };
-      
+
       updateZipcode(zipcode)
          //.then(this.retrieveUserData())
          .then(({ data: dbUserData }) => {
@@ -61,13 +71,24 @@ class Garden extends Component {
             <div className="container">
             <NavbarDropdown username={this.state.username}
             onZipcodeChange={this.handleZipcodeChange}
-            handleFormSubmit={this.handleFormSubmit}
+            handleFormSubmitZipcode={this.handleFormSubmitZipcode}
             zipcode={this.state.zipcode}
             />
+
             <h1>THIS IS GARDEN PAGE</h1>
-            
             <h1>Username: {this.state.username}</h1>
             <h1>Zipcode: {this.state.zipcode}</h1>
+            
+            <Row>
+            <Col>
+            <Button onClick={this.toggleHidden.bind(this)}> click to show PlantForm</Button>
+
+            {!this.state.isHidden && <PlantForm />}
+
+            <PlantCard />
+            </Col>
+            </Row>
+
             </div>
             
             

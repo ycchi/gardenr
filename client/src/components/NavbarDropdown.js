@@ -16,7 +16,7 @@ import {
   FormGroup, 
   Label, 
   Input,
-Card
+  Container
 } from 'reactstrap';
 
 export default class NavbarDropdown extends React.Component {
@@ -57,9 +57,9 @@ export default class NavbarDropdown extends React.Component {
                 <DropdownMenu right>
                   
                   
-                  <Card>
+                  <Container>
                     <Form onSubmit={() => {
-                       this.props.handleFormSubmit()
+                       this.props.handleFormSubmitZipcode()
                     }}>
                      <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                         <Label for="zipcode" className="mr-sm-2">Garden Zipcode</Label>
@@ -69,7 +69,7 @@ export default class NavbarDropdown extends React.Component {
                      </FormGroup>
                      <Button type="submit">Update</Button>
                   </Form>
-                </Card>
+                  </Container>
 
 
                   <DropdownItem divider />
