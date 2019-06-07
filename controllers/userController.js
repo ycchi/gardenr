@@ -24,9 +24,21 @@ const updateUserZipcode = (req, res) => {
          console.log(err);
          res.status(500).json(err)
       })
-
 }
 
+const getUser = (req, res) => {
+
+   User.findOne({_id: req.user._id})
+     .then((dbPlantData) => {
+       res.status(200).json(dbPlantData);
+     })
+     .catch((err) => {
+       console.log(err);
+       res.status(500).json(err)
+     })
+ }
+
 module.exports = {
-   updateUserZipcode
+   updateUserZipcode,
+   getUser
 }

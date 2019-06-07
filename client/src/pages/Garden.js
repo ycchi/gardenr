@@ -43,9 +43,15 @@ class Garden extends Component {
          .then(({ data: dbUserData }) => {
             const dbUserName = dbUserData.username;
             const dbUserZipcode = dbUserData.zipcode;
+            const dbPlants = dbUserData.plants;
+            
+            console.log(`dbUserData: ${JSON.stringify(dbUserData)}`)
+            console.log(`dbPlant: ${dbPlants}`)
+
             this.setState({ 
                username: dbUserName, 
-               zipcode: dbUserZipcode 
+               zipcode: dbUserZipcode,
+               plants: dbPlants
             });
          })
    }

@@ -6,24 +6,18 @@ const { User } = require('../models/user');
 const { Plant } = require('../models/user');
 
 
-
-
+// api/plants
+// GET
 const getPlants = (req, res) => {
-
-  console.log(`RUNNING: getPlant
-    req.user._id: ${req.user._id}`)
-
-  User.findOne({_id: req.user._id})
-    .populate("plants")
-    .then((dbPlantData) => {
-      res.status(200).json(dbPlantData);
+  Plant.find()
+    .then(dbPlantData => {
+      res.status(200).json(dbPlantData)
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err);
       res.status(500).json(err)
     })
 }
-
 
 // api/plants/:id
 // GET
@@ -49,7 +43,9 @@ const getPlantById = (req, res) => {
 // POST
 // /:id not required since passport provides logged in user info
 const addPlant = (req, res) => {
+
   console.log(`RUNNING: addPlant`)
+  
   Plant.create(req.body)
     .then((dbPlantData) => {
       // req.user._id passed from PASSPORT authCheck

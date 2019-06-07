@@ -1,12 +1,12 @@
 
 const router = require("express").Router();
-const mongoose = require("mongoose");
+
 
 const { getPlants, getPlantById, addPlant, updatePlant, deletePlant } = require("../controllers/plantController");
 
 const { getWeatherData } = require("../controllers/weatherController");
 
-const { updateUserZipcode } = require('../controllers/userController');
+const { updateUserZipcode, getUser } = require('../controllers/userController');
 
 
 
@@ -28,10 +28,10 @@ router.get("/weather", authCheck, getWeatherData);
 router.get("/plants", authCheck, getPlants);
 router.get("/plants/:id", authCheck, getPlantById);
 router.post("/plants", authCheck, addPlant);
-// router.post("/plants", addPlant);
 router.put("/plants/:id", authCheck, updatePlant);
 router.delete("/plants/:id", authCheck, deletePlant);
 
-router.put("/user", authCheck, updateUserZipcode)
+router.put("/user", authCheck, updateUserZipcode);
+router.get("/user", authCheck, getUser);
 
 module.exports = router;

@@ -10,7 +10,7 @@ export const updateZipcode = (zipcode) => {
 }
 
 export const getUserData = () => {
-   return axios.get('/api/plants');
+   return axios.get('/api/user');
 };
 
 export const addPlant = (plantData) => {
