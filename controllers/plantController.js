@@ -49,6 +49,7 @@ const getPlantById = (req, res) => {
 // POST
 // /:id not required since passport provides logged in user info
 const addPlant = (req, res) => {
+  console.log(`RUNNING: addPlant`)
   Plant.create(req.body)
     .then((dbPlantData) => {
       // req.user._id passed from PASSPORT authCheck

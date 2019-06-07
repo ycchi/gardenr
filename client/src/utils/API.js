@@ -15,7 +15,8 @@ export const getUserData = () => {
 
 export const addPlant = (plantData) => {
    console.log(`RUNNING: addPlant`)
-   return axios.post('/api/plant', plantData)
+   console.log(`plantData: ${plantData}`)
+   return axios.post('/api/plants', plantData)
 }
 
 

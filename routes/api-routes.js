@@ -28,6 +28,7 @@ router.get("/weather", authCheck, getWeatherData);
 router.get("/plants", authCheck, getPlants);
 router.get("/plants/:id", authCheck, getPlantById);
 router.post("/plants", authCheck, addPlant);
+// router.post("/plants", addPlant);
 router.put("/plants/:id", authCheck, updatePlant);
 router.delete("/plants/:id", authCheck, deletePlant);
 

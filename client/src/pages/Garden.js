@@ -9,28 +9,30 @@ import { Row, Col, Button } from 'reactstrap';
 
 class Garden extends Component {
 
-   
-
    constructor(props) {
       super(props);
       this.handleZipcodeChange = this.handleZipcodeChange.bind(this);
+      this.handleNewPlantChange = this.handleNewPlantChange.bind(this);
       this.state = {
          username: '',
          plants: [],
          zipcode: '',
-         isHidden: true
+         isHidden: true,
+         newPlantName: '',
+         newPlantNickname: '',
+         newPlantDate: '',
+
       };
     }
    
+   // Show / Hide input form
    toggleHidden () {
       this.setState({
          isHidden: !this.state.isHidden
       })
    }
 
-   handleZipcodeChange(zipcode) {
-      this.setState({zipcode});
-    }
+ 
 
    componentDidMount() {
       this.retrieveUserData();
@@ -48,6 +50,10 @@ class Garden extends Component {
          })
    }
 
+   handleZipcodeChange(zipcode) {
+      this.setState({zipcode});
+   }
+
    handleFormSubmitZipcode = event => {
       console.log(`RUNNING: handleFormSubmit`)
       // event.preventDefault();
@@ -55,6 +61,7 @@ class Garden extends Component {
          zipcode: this.state.zipcode
       };
 
+      // axios 'PUT' /api/user
       updateZipcode(zipcode)
          //.then(this.retrieveUserData())
          .then(({ data: dbUserData }) => {
@@ -64,6 +71,28 @@ class Garden extends Component {
             })
          })
    }
+
+   handleNewPlantChange(newPlant) {
+      this.setState({
+         newPlantName: newPlant.plantName,
+         newPlantNickname: newPlant.nickname,
+         newPlantDate: newPlant.date
+      })
+   }
+
+   handleFormSubmitNewPlant = event => {
+      const newPlant = {
+         specie: this.state.newPlantName,
+         nickname: this.state.newPlantNickname,
+         plantedDate: this.state.newPlantDate
+      }
+
+      console.log(`handleFormSubmitNewPlant: ${newPlant}`)
+      addPlant(newPlant)
+         .then(this.retrieveUserData())
+   }
+
+
 
    render() {
       return (
@@ -83,7 +112,13 @@ class Garden extends Component {
             <Col>
             <Button onClick={this.toggleHidden.bind(this)}> click to show PlantForm</Button>
 
-            {!this.state.isHidden && <PlantForm />}
+            {!this.state.isHidden && <PlantForm 
+            onNewPlantChange={this.handleNewPlantChange}
+            handleFormSubmitNewPlant={this.handleFormSubmitNewPlant}
+            newPlantName={this.state.newPlantName}
+            newPlantNickname={this.state.newPlantNickname}
+            newPlantDate={this.state.newPlantDate}
+            />}
 
             <PlantCard />
             </Col>
