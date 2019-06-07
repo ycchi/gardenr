@@ -1,7 +1,9 @@
+/* eslint-disable no-underscore-dangle */
 const { User } = require('../models/user');
 
 const updateUserZipcode = (req, res) => {
    console.log(`RUNNING: updateUserZipcode`)
+   console.log(`req.body: ${req.body}`)
    console.log(`req.body: ${JSON.stringify(req.body)}`)
 
    const keys = Object.keys(req.body);
@@ -11,8 +13,6 @@ const updateUserZipcode = (req, res) => {
 
    User.findByIdAndUpdate(
       req.user._id, 
-
-      
       { $set: { zipcode: req.body[keys[0]] }}, 
       {new: true}
       )

@@ -41,8 +41,10 @@ class Garden extends Component {
    handleFormSubmit = event => {
       console.log(`RUNNING: handleFormSubmit`)
       // event.preventDefault();
-      const zipcode = this.state.zipcode
-
+      const zipcode = {
+         zipcode: this.state.zipcode
+      };
+      
       updateZipcode(zipcode)
          //.then(this.retrieveUserData())
          .then(({ data: dbUserData }) => {
