@@ -23,8 +23,8 @@ const authCheck = (req, res, next) => {
 
 router.get("/weather", authCheck, getWeatherData);
 
-// use below for production
 
+// returns all plants regardless of User
 router.get("/plants", authCheck, getPlants);
 router.get("/plants/:id", authCheck, getPlantById);
 router.post("/plants", authCheck, addPlant);

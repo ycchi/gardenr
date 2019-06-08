@@ -32,7 +32,7 @@ export default class NavbarDropdown extends React.Component {
 
   handleChange(e) {
    this.props.onZipcodeChange(e.target.value);
- }
+  }
 
   toggle() {
     this.setState({

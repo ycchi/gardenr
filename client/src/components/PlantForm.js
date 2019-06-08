@@ -9,13 +9,11 @@ export default class PlantForm extends React.Component {
    }
 
    handleChange(e) {
-      this.props.onNewPlantChange(e.target.value)
+      this.props.onNewPlantChange(e)
    }
 
    render() {
-      const plantName = this.props.newPlantName;
-      const nickname = this.props.newPlantNickname;
-      const date = this.props.newPlantDate;
+      
     return (
       <Form onSubmit={()=> {
          this.props.handleFormSubmitNewPlant()
@@ -23,14 +21,14 @@ export default class PlantForm extends React.Component {
         <FormGroup row>
           <Label for="plantName" sm={2}>Plant Name</Label>
           <Col sm={10}>
-            <Input type="text" name="plantName" id="plantName" placeholder="Garden Tomato" value={plantName} 
+            <Input type="text" name="newPlantName" id="plantName" placeholder="Garden Tomato"
             onChange={this.handleChange}/>
           </Col>
         </FormGroup>
         <FormGroup row>
           <Label for="nickname" sm={2}>Nickname</Label>
           <Col sm={10}>
-            <Input type="text" name="nickname" id="nickname" placeholder="Tomato #3" value={nickname}
+            <Input type="text" name="newPlantNickname" id="nickname" placeholder="Tomato #3"
             onChange={this.handleChange}/>
           </Col>
         </FormGroup>
@@ -40,10 +38,9 @@ export default class PlantForm extends React.Component {
           <Col sm={10}>
           <Input
             type="date"
-            name="date"
+            name="newPlantDate"
             id="PlantedDate"
             placeholder="date placeholder"
-            value={date}
             onChange={this.handleChange}
           />
           </Col>

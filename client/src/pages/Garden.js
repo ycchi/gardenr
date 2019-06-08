@@ -57,7 +57,8 @@ class Garden extends Component {
    }
 
    handleZipcodeChange(zipcode) {
-      this.setState({zipcode});
+      this.setState({
+         zipcode: zipcode});
    }
 
    handleFormSubmitZipcode = event => {
@@ -78,11 +79,11 @@ class Garden extends Component {
          })
    }
 
-   handleNewPlantChange(newPlant) {
+
+////////// handle here
+   handleNewPlantChange(e) {
       this.setState({
-         newPlantName: newPlant.plantName,
-         newPlantNickname: newPlant.nickname,
-         newPlantDate: newPlant.date
+         [e.target.name]: e.target.value
       })
    }
 
@@ -104,11 +105,19 @@ class Garden extends Component {
       return (
          <React.Fragment>
             <div className="container">
-            <NavbarDropdown username={this.state.username}
+
+
+
+            <NavbarDropdown 
+            username={this.state.username}
             onZipcodeChange={this.handleZipcodeChange}
             handleFormSubmitZipcode={this.handleFormSubmitZipcode}
             zipcode={this.state.zipcode}
             />
+
+
+
+
 
             <h1>THIS IS GARDEN PAGE</h1>
             <h1>Username: {this.state.username}</h1>
