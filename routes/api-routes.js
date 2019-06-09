@@ -2,7 +2,7 @@
 const router = require("express").Router();
 
 
-const { getPlants, getPlantById, addPlant, updatePlant, deletePlant } = require("../controllers/plantController");
+const { getPlants, getPlantById, addPlant, updatePlant, deletePlant, findPlants } = require("../controllers/plantController");
 
 const { getWeatherData } = require("../controllers/weatherController");
 
@@ -25,7 +25,8 @@ router.get("/weather", authCheck, getWeatherData);
 
 
 // returns all plants regardless of User
-router.get("/plants", authCheck, getPlants);
+// router.get("/plants", authCheck, getPlants);
+router.get("/plants", authCheck, findPlants);
 router.get("/plants/:id", authCheck, getPlantById);
 router.post("/plants", authCheck, addPlant);
 router.put("/plants/:id", authCheck, updatePlant);

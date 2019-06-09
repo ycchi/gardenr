@@ -8,6 +8,8 @@ const { Plant } = require('../models/user');
 
 // api/plants
 // GET
+
+// find where owner is...
 const getPlants = (req, res) => {
   Plant.find()
     .then(dbPlantData => {
@@ -53,12 +55,13 @@ const addPlant = (req, res) => {
         _id: req.user._id
       }, 
       {
-        $push: {plants: dbPlantData._id}
+        $push: {plants: dbPlantData}
       }, 
       {
-        upsert: true,
-        returnNewDocument: true
-      })
+        upsert: false,
+        returnNewDocument: false
+      }
+      )
     })
     .then((dbUserData) => {
       res.status(200).json(dbUserData)
@@ -68,6 +71,34 @@ const addPlant = (req, res) => {
       res.status(500).json(err)
     })
 }
+
+
+
+
+const findPlants = (req, res) => {
+
+  console.log(`RUNNING: findPlants`)
+  
+  User.find({_id: req.user._id})
+  // .populate({
+  //   path: 'plants'
+  // })
+  // .populate('plants')
+  .then(dbPlantData => {
+    console.log(dbPlantData[0].plants)
+    res.status(200).json(dbPlantData[0].plants)
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+  })
+
+  
+}
+
+
+
+
 
 // api/plants/:id
 // PUT
@@ -104,5 +135,7 @@ const deletePlant = (req, res) => {
     getPlantById,
     addPlant,
     updatePlant,
-    deletePlant
+    deletePlant,
+
+    findPlants
  }
