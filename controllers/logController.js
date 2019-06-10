@@ -37,28 +37,46 @@ const getLogById = (req, res) => {
 
 // CREATE/POST log
 const addLog = (req, res) => {
-   Log.create(req.body)
-      .then(dbLogData => {
-         // find and update in plant schema
-         // plantId required from front-end
-         return Plant.findOneAndUpdate({
-            _id: req.body.plantId
-         },
-         {
-            $push: {logs: dbLogData._id}
-         },
-         {
-            upsert: true,
-            returnNewDocument: true
-         })
-      })
-      .then(dbPlantData => {
-         res.status(200).json(dbPlantData);
-      })
-      .catch(err => {
-         console.log(err);
-         res.status(500).json(err);
-      })
+
+   console.log(`RUNNING: addLog`)
+
+   console.log(`req.body: ${req.body.logDate}`)
+   console.log(`req.body.plantId: ${req.body.plantId}`)
+   const log = {
+      logDate: req.body.logDate,
+      logBody: req.body.logBody,
+      rain: req.body.rain,
+      avgTemp: req.body.avgTemp,
+      height: req.body.height,
+      output: req.body.output
+   }
+   // const log = {
+   //    logDate: "01-01-2001",
+   //    logBody: "TEST FROM CONTROLLER",
+   //    rain: req.body.rain,
+   //    avgTemp: req.body.avgTemp,
+   //    height: req.body.height,
+   //    output: req.body.output
+   // }
+
+   User.findById(req.user._id, (err, user) => {
+
+      // find plant by id
+      const plant = user.plants.id(req.body.plantId)
+
+      plant.logs.push(log);
+      // plant.save()
+      user.save()
+      
+      
+   })
+   .then(dbUserData => {
+      console.log(`dbUserData: ${dbUserData}`)
+      res.status(200).json(dbUserData)})
+   .catch(err => {
+      console.log(err);
+      res.status(500).json(err)
+   })
 };
 
 
@@ -97,5 +115,5 @@ const deleteLog = (req, res) => {
 
 
 module.exports = {
-
+   addLog
 }

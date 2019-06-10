@@ -19,8 +19,23 @@ export const addPlant = (plantData) => {
    return axios.post('/api/plants', plantData)
 }
 
+export const getPlantById = (plantId) => {
+   return axios.get(`/api/plants/${plantId}`);
+}
+
+export const removePlant = (plantId) => {
+   return axios.delete(`/api/plants/${plantId}`)
+};
+
+export const addLog = (logData) => {
+   return axios.post(`/api/logs`, logData)
+}
 
 export default {
    getUserData,
-   updateZipcode
+   updateZipcode,
+   removePlant,
+   getPlantById,
+
+   addLog
 }

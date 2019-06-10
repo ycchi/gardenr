@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getUserData, updateZipcode, addPlant } from '../utils/API';
+import { getUserData, updateZipcode, addPlant, removePlant } from '../utils/API';
 // import NavBar from '../components/NavBar';
 import NavbarDropdown from '../components/NavbarDropdown';
 import PlantCard from '../components/PlantCard';
@@ -46,7 +46,6 @@ class Garden extends Component {
             const dbPlants = dbUserData.plants;
             
             console.log(`dbUserData: ${JSON.stringify(dbUserData)}`)
-            console.log(`dbPlant: ${dbPlants}`)
 
             this.setState({ 
                username: dbUserName, 
@@ -99,6 +98,13 @@ class Garden extends Component {
          .then(this.retrieveUserData())
    }
 
+   handleRemovePlant = plantId => {
+      console.log(`RUNNING: handleRemovePlant`);
+      removePlant(plantId)
+         // .then(this.retrieveUserData())
+         .catch(err => console.log(err))
+   }
+
 
 
    render() {
@@ -135,7 +141,23 @@ class Garden extends Component {
             newPlantDate={this.state.newPlantDate}
             />}
 
-            <PlantCard />
+            {!this.state.plants.length ? (
+               <h2 className="text-center">No saved plants, yet.</h2>
+            ) : (
+               this.state.plants.map(plant => {
+                  return (
+                     <PlantCard 
+                        specie={plant.specie}
+                        nickname={plant.nickname}
+                        removePlant={this.handleRemovePlant}
+                        plantId={plant._id}
+                        retrieveUserData={this.retrieveUserData}
+                        />
+
+                  )
+               })
+            )}
+            
             </Col>
             </Row>
 

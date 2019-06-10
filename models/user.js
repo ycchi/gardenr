@@ -8,21 +8,28 @@ const { Schema } = mongoose;
 
 const LogSchema = new Schema({
    logDate: {
-      type: Date,
+      type: String,
       required: true,
    },
    logBody: {
-      type: Date
+      type: String
    },
-   rainTotal: {
+   rain: {
       type: Number
    },
    avgTemp: {
       type: Number
+   },
+   height: {
+      type: Number
+   },
+   output: {
+      type: Number
    }
+
 });
 
-// create subDocument for modeling plants in the garden
+
 const PlantSchema = new Schema({
 
    specie: {
