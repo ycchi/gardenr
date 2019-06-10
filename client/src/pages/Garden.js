@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { getUserData, updateZipcode, addPlant, removePlant } from '../utils/API';
-// import NavBar from '../components/NavBar';
+import { getWeatherDataByZipcode } from '../utils/Weather';
 import NavbarDropdown from '../components/NavbarDropdown';
 import PlantCard from '../components/PlantCard';
 import PlantForm from '../components/PlantForm';
 import { Row, Col, Button } from 'reactstrap';
+const axios = require('axios')
 
 
 class Garden extends Component {
@@ -21,6 +22,13 @@ class Garden extends Component {
          newPlantName: '',
          newPlantNickname: '',
          newPlantDate: '',
+         avgTemp: [],
+         avgTempWeek: "",
+         dateRange: [],
+         rainArr: [],
+         rainSum: '',
+         rainTotal: '',
+         tempInch: '',
 
       };
     }
@@ -32,28 +40,40 @@ class Garden extends Component {
       })
    }
 
- 
-
    componentDidMount() {
       this.retrieveUserData();
    }
+   
+   retrieveUserData = async () => {
+      let userData = await getUserData();
+      let weatherData = await getWeatherDataByZipcode(userData.data.zipcode);
+         
+         console.log(`RUNNING ASYNC`)
+         console.log(userData)
+         console.log(weatherData)
 
-   retrieveUserData = () => {
-      getUserData()
-         .then(({ data: dbUserData }) => {
-            const dbUserName = dbUserData.username;
-            const dbUserZipcode = dbUserData.zipcode;
-            const dbPlants = dbUserData.plants;
-            
-            console.log(`dbUserData: ${JSON.stringify(dbUserData)}`)
-
-            this.setState({ 
-               username: dbUserName, 
-               zipcode: dbUserZipcode,
-               plants: dbPlants
-            });
-         })
+      this.setState({
+         username: userData.data.username,
+         zipcode: userData.data.zipcode,
+         plants: userData.data.plants,
+         avgTemp: weatherData.avgTemp,
+         avgTempWeek: weatherData.avgTempWeek,
+         dateRange: weatherData.dateRange,
+         rainArr: weatherData.rainArr,
+         rainSum: weatherData.rainSum,
+         rainTotal: weatherData.rainTotal,
+         tempInch: weatherData.tempInch
+      })
+         
    }
+
+   // retrieveWeatherData = () => {
+   //    getWeatherDataByZipcode(this.state.zipcode)
+   //       .then(({ data: apiWeatherData}) => {
+   //          console.log(apiWeatherData)
+   //       })
+   // }
+
 
    handleZipcodeChange(zipcode) {
       this.setState({
@@ -158,6 +178,8 @@ class Garden extends Component {
                })
             )}
             
+
+
             </Col>
             </Row>
 
