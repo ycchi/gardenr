@@ -4,7 +4,7 @@ const { updateUserZipcode, getUser } = require('../controllers/userController');
 
 const { getPlants, getPlantById, addPlant, updatePlant, deletePlant, findPlants } = require("../controllers/plantController");
 
-const { addLog } = require("../controllers/logController")
+const { addLog, deleteLog } = require("../controllers/logController")
 
 
 
@@ -39,5 +39,6 @@ router.put("/plants/:id", authCheck, updatePlant);
 router.delete("/plants/:id", authCheck, deletePlant);
 
 router.post("/logs", authCheck, addLog);
+router.get("/logs", authCheck, deleteLog);
 
 module.exports = router;

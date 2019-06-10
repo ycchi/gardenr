@@ -50,15 +50,7 @@ const addLog = (req, res) => {
       height: req.body.height,
       output: req.body.output
    }
-   // const log = {
-   //    logDate: "01-01-2001",
-   //    logBody: "TEST FROM CONTROLLER",
-   //    rain: req.body.rain,
-   //    avgTemp: req.body.avgTemp,
-   //    height: req.body.height,
-   //    output: req.body.output
-   // }
-
+  
    User.findById(req.user._id, (err, user) => {
 
       // find plant by id
@@ -102,18 +94,30 @@ const updateLog = (req, res) => {
 // REMOVE/DELETE log
 // api/logs/:id
 const deleteLog = (req, res) => {
-   Log.deleteOne({_id: req.params.id})
-      .then(dbLogData => {
-         res.status(200).json(dbLogData);
-      })
-      .catch(err => {
-         console.log(err);
-         res.status(500).json(err)
-      })
+   
+
+   User.findById(req.user._id, (err, user) => {
+      // find plant by id
+      console.log(`req.query.plantId: ${req.query.plantId}`)
+      console.log(`req.query.logId: ${req.query.logId}`)
+      
+      const plant = user.plants.id(req.query.plantId);
+      
+      plant.logs.pull({_id: req.query.logId});
+      user.save();
+   })
+   .then(dbPlantData => {
+      res.status(200).json(dbPlantData)
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err)
+    })
 }
 
 
 
 module.exports = {
-   addLog
+   addLog,
+   deleteLog
 }

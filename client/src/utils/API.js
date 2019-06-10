@@ -31,11 +31,22 @@ export const addLog = (logData) => {
    return axios.post(`/api/logs`, logData)
 }
 
+export const removeLog = (plantId, logId) => {
+   return axios.get(`/api/logs/`, {
+      params: {
+         plantId: plantId,
+         logId: logId
+      }
+   })   
+} 
+
+
 export default {
    getUserData,
    updateZipcode,
    removePlant,
    getPlantById,
 
-   addLog
+   addLog,
+   removeLog
 }

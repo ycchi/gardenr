@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { Table } from 'reactstrap';
 import { getPlantById, addLog } from '../utils/API';
 import LogForm from '../components/LogForm'
 import NavbarDropdown from '../components/NavbarDropdown';
+import LogTable from '../components/LogTable'
 
 
 export default class Plant extends React.Component {
@@ -84,7 +86,48 @@ export default class Plant extends React.Component {
                   newLogOutput={this.state.newLogOutput}
                   ></LogForm>
 
-                  <h1>{this.state.newLogBody}</h1>
+                  
+                  
+                  <Table>
+                  <thead>
+                     <tr>
+                        <th>Log Date</th>
+                        <th>Rain</th>
+                        <th>Temperature</th>
+                        <th>Height (in)</th>
+                        <th># of Fruits/Crops</th>
+                        <th>Log</th>
+                     </tr>
+                  </thead>
+
+                  <tbody>
+                     
+                     {!this.state.logs.length ? (
+                     
+                           <th>No Saved Logs yet..</th>
+                        
+                  ) : (
+                     this.state.logs.map(log => {
+                        return (
+                           <LogTable 
+                              logDate={log.logDate}
+                              rain={log.rain}
+                              temp={log.avgTemp}
+                              height={log.height}
+                              output={log.output}
+                              logBody={log.logBody}
+                              logId={log._id}
+                              plantId={this.state.plantId}
+                              retrievePlantData={this.retrievePlantData}
+                           />
+               
+                        )
+                     })
+                  )}
+                  </tbody>
+                  
+                  
+               </Table>
             </div>
 
          </React.Fragment>
