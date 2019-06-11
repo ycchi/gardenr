@@ -16,8 +16,15 @@ export default class MixChart extends React.Component {
    render() {
       return (
          <React.Fragment>
-            <h2 className="display-3">Rain and Temperature</h2>
-            <h2 className="display-3">{this.props.weatherData.dateRange[0]}</h2>
+            
+            <p className="lead">Today is {this.props.weatherData.dateRange[6]}.</p>
+            <p className="lead"> In the past 7 days, average temperature is  {this.props.weatherData.avgTempWeek} Fahrenheit, and total rain fall accumulated {this.props.weatherData.rainSum} inches. </p>
+
+            {(parseInt(this.props.weatherData.rainTotal) < 1) ? 
+            (<p className="lead">Your garden needs {1 - this.props.weatherData.rainTotal} inches of water today.</p>) :
+            (<p className="lead">Your garden does not need water today</p>) 
+            }
+
             <Bar
                data={{
                   labels: this.props.weatherData.dateRange,
@@ -41,6 +48,7 @@ export default class MixChart extends React.Component {
                   ]
                }}
                options={{
+                  responsive: true,
                   scales: {
                      yAxes: [
                          {

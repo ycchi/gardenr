@@ -156,19 +156,14 @@ class Garden extends Component {
             zipcode={this.state.zipcode}
             />
 
-
-
-            
-            <h1>THIS IS GARDEN PAGE</h1>
-            <h2>Username: {this.state.username}</h2>
-            <h2>Zipcode: {this.state.zipcode}</h2>
-            <h2>{this.state.weatherData.rainTotal}</h2>
-            
-
+         
             <Row>
+               <Col>
                <Jumbotron>
                   <MixChart weatherData={this.state.weatherData} />
                </Jumbotron>
+               </Col>
+               
             </Row>
             
             
