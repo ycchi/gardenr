@@ -12,12 +12,12 @@ function convertInches(degree) {
    return result;
 }
 
-let weatherObj = {
-   zipCode: "07013",
-   dateRange: [],
-   rainArr: [],
-   avgTemp: []
-};
+// let weatherObj = {
+//    zipCode: "07013",
+//    dateRange: [],
+//    rainArr: [],
+//    avgTemp: []
+// };
 
 // get zipcode from logged in user.. 
 // axios.get("http://localhost:3000/api/user")
@@ -65,8 +65,8 @@ export const getWeatherDataByZipcode = (zipcode) => {
       `),
       axios.get(`https://api.apixu.com/v1/history.json?key=c8f2ed219aad4fe595204455191805&q=${zipcode}&dt=${moment().subtract(6, 'days').format("YYYY-MM-DD")}
       `),
-      axios.get(`https://api.apixu.com/v1/history.json?key=c8f2ed219aad4fe595204455191805&q=${zipcode}&dt=${moment().subtract(7, 'days').format("YYYY-MM-DD")}
-      `)
+      // axios.get(`https://api.apixu.com/v1/history.json?key=c8f2ed219aad4fe595204455191805&q=${zipcode}&dt=${moment().subtract(7, 'days').format("YYYY-MM-DD")}
+      // `)
    ])
    .then(axios.spread((res0, res1, res2, res3, res4, res5, res6) => {  
    
@@ -118,7 +118,7 @@ export const getWeatherDataByZipcode = (zipcode) => {
 
      // send data as json to 'api/weather
      // res.json(weatherData);
-     
+     console.log(`weatherData: ${weatherData}`)
      return weatherData
   })
   // .catch(error => console.log(error));

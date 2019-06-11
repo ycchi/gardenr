@@ -4,8 +4,10 @@ import { getWeatherDataByZipcode } from '../utils/Weather';
 import NavbarDropdown from '../components/NavbarDropdown';
 import PlantCard from '../components/PlantCard';
 import PlantForm from '../components/PlantForm';
-import { Row, Col, Button } from 'reactstrap';
-const axios = require('axios')
+import MixChart from '../components/mixChart';
+import { Row, Col, Button, Jumbotron } from 'reactstrap';
+import { runInNewContext } from 'vm';
+
 
 
 class Garden extends Component {
@@ -22,13 +24,15 @@ class Garden extends Component {
          newPlantName: '',
          newPlantNickname: '',
          newPlantDate: '',
-         avgTemp: [],
-         avgTempWeek: "",
-         dateRange: [],
-         rainArr: [],
-         rainSum: '',
-         rainTotal: '',
-         tempInch: '',
+         weatherData: {
+            avgTemp: [],
+            avgTempWeek: "",
+            dateRange: [],
+            rainArr: [],
+            rainSum: '',
+            rainTotal: '',
+            tempInch: '',
+         }
 
       };
     }
@@ -45,25 +49,36 @@ class Garden extends Component {
    }
    
    retrieveUserData = async () => {
-      let userData = await getUserData();
-      let weatherData = await getWeatherDataByZipcode(userData.data.zipcode);
-         
-         console.log(`RUNNING ASYNC`)
-         console.log(userData)
-         console.log(weatherData)
+      console.log(`RUNNING ASYNC`)
 
+      let userData = await getUserData();
+      console.log(userData)
       this.setState({
          username: userData.data.username,
          zipcode: userData.data.zipcode,
          plants: userData.data.plants,
-         avgTemp: weatherData.avgTemp,
-         avgTempWeek: weatherData.avgTempWeek,
-         dateRange: weatherData.dateRange,
-         rainArr: weatherData.rainArr,
-         rainSum: weatherData.rainSum,
-         rainTotal: weatherData.rainTotal,
-         tempInch: weatherData.tempInch
       })
+      try {
+         let weatherData = await getWeatherDataByZipcode(userData.data.zipcode);
+         console.log(weatherData)
+         this.setState({
+            weatherData: {
+               avgTemp: weatherData.avgTemp,
+               avgTempWeek: weatherData.avgTempWeek,
+               dateRange: weatherData.dateRange,
+               rainArr: weatherData.rainArr,
+               rainSum: weatherData.rainSum,
+               rainTotal: weatherData.rainTotal,
+               tempInch: weatherData.tempInch
+            }
+         })
+      } catch (error) {
+         console.log(error)
+      }
+      
+      
+
+      
          
    }
 
@@ -143,11 +158,19 @@ class Garden extends Component {
 
 
 
-
-
+            
             <h1>THIS IS GARDEN PAGE</h1>
-            <h1>Username: {this.state.username}</h1>
-            <h1>Zipcode: {this.state.zipcode}</h1>
+            <h2>Username: {this.state.username}</h2>
+            <h2>Zipcode: {this.state.zipcode}</h2>
+            <h2>{this.state.weatherData.rainTotal}</h2>
+            
+
+            <Row>
+               <Jumbotron>
+                  <MixChart weatherData={this.state.weatherData} />
+               </Jumbotron>
+            </Row>
+            
             
             <Row>
             <Col>
