@@ -64,9 +64,8 @@ export const getWeatherDataByZipcode = (zipcode) => {
       axios.get(`https://api.apixu.com/v1/history.json?key=c8f2ed219aad4fe595204455191805&q=${zipcode}&dt=${moment().subtract(5, 'days').format("YYYY-MM-DD")}
       `),
       axios.get(`https://api.apixu.com/v1/history.json?key=c8f2ed219aad4fe595204455191805&q=${zipcode}&dt=${moment().subtract(6, 'days').format("YYYY-MM-DD")}
-      `),
-      // axios.get(`https://api.apixu.com/v1/history.json?key=c8f2ed219aad4fe595204455191805&q=${zipcode}&dt=${moment().subtract(7, 'days').format("YYYY-MM-DD")}
-      // `)
+      `)
+      
    ])
    .then(axios.spread((res0, res1, res2, res3, res4, res5, res6) => {  
    
@@ -79,8 +78,7 @@ export const getWeatherDataByZipcode = (zipcode) => {
       weatherData.rainArr.push(res4.data.forecast.forecastday[0].day.totalprecip_in);
       weatherData.rainArr.push(res5.data.forecast.forecastday[0].day.totalprecip_in);
       weatherData.rainArr.push(res6.data.forecast.forecastday[0].day.totalprecip_in);
-     // weatherData.rainArr.push(res7.data.forecast.forecastday[0].day.totalprecip_in);
-
+     
    
       // get daily avg temp
       weatherData.avgTemp.push(res0.data.forecast.forecastday[0].day.avgtemp_f);
@@ -90,7 +88,7 @@ export const getWeatherDataByZipcode = (zipcode) => {
       weatherData.avgTemp.push(res4.data.forecast.forecastday[0].day.avgtemp_f);
       weatherData.avgTemp.push(res5.data.forecast.forecastday[0].day.avgtemp_f);
       weatherData.avgTemp.push(res6.data.forecast.forecastday[0].day.avgtemp_f);
-     // weatherData.avgTemp.push(res7.data.forecast.forecastday[0].day.avgtemp_f);
+     
 
       // get date range
       weatherData.dateRange.push(res6.data.forecast.forecastday[0].date);
