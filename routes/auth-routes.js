@@ -16,7 +16,7 @@ router.get("/logout", async (req, res) => {
     await req.logout()
     req.session = null
     req.sessionOptions.maxAge = 0
-    return res.redirect('/')
+    return res.redirect('http://localhost:3000/')
     
 })
 
@@ -33,7 +33,7 @@ router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
    // res.send(req.user)  
    console.log(`BEFORE REDIRECT...`);
    console.log(`req.user.username: ${req.user.username}`)
-   res.redirect("/profile/")
+   res.redirect("http://localhost:3000/garden/")
 })
 
 

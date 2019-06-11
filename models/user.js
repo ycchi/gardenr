@@ -1,11 +1,53 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable func-names */
 const mongoose = require("mongoose");
 
 
 // Object destructuring
 const { Schema } = mongoose;
 
+
+
+const LogSchema = new Schema({
+   logDate: {
+      type: String,
+      required: true,
+   },
+   logBody: {
+      type: String
+   },
+   rain: {
+      type: Number
+   },
+   avgTemp: {
+      type: Number
+   },
+   height: {
+      type: Number
+   },
+   output: {
+      type: Number
+   }
+
+});
+
+
+const PlantSchema = new Schema({
+
+   specie: {
+      type: String,
+      // required: true
+   },
+   nickname: {
+      type: String,
+      // required: true
+   },
+   ownerId: {
+      type: String,
+   },
+   plantedDate: {
+      type: String
+   },
+   logs: [LogSchema]
+});
 
 const UserSchema = new Schema({
    username: {
@@ -17,16 +59,20 @@ const UserSchema = new Schema({
       type: String,
       required: true
    },
-   plants: [
-      {
-         // Store ObjectIds in the array
-         type: Schema.Types.ObjectId,
-         // The ObjectIds will refer to the ids in the plant model
-         ref: "Plant"
-       }
-   ]
+   zipcode: {
+      type: String,
+   },
+   plants: [PlantSchema]
 });
 
 
 
-module.exports = mongoose.model('User', UserSchema);
+const User = mongoose.model('User', UserSchema);
+const Plant = mongoose.model('Plant', PlantSchema);
+const Log = mongoose.model('Log', LogSchema);
+
+module.exports = { 
+   User,
+   Plant,
+   Log
+}

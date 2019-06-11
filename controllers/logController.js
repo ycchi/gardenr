@@ -1,9 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 
 // dependencies
-const { User } = require('../models');
-const { Plant } = require('../models');
-const { Log } = require('../models');
+const { User } = require('../models/user');
+const { Plant } = require('../models/user');
+const { Log } = require('../models/user');
 
 
 // READ/GET logs for a specific plant
@@ -37,28 +37,38 @@ const getLogById = (req, res) => {
 
 // CREATE/POST log
 const addLog = (req, res) => {
-   Log.create(req.body)
-      .then(dbLogData => {
-         // find and update in plant schema
-         // plantId required from front-end
-         return Plant.findOneAndUpdate({
-            _id: req.body.plantId
-         },
-         {
-            $push: {logs: dbLogData._id}
-         },
-         {
-            upsert: true,
-            returnNewDocument: true
-         })
-      })
-      .then(dbPlantData => {
-         res.status(200).json(dbPlantData);
-      })
-      .catch(err => {
-         console.log(err);
-         res.status(500).json(err);
-      })
+
+   console.log(`RUNNING: addLog`)
+
+   console.log(`req.body: ${req.body.logDate}`)
+   console.log(`req.body.plantId: ${req.body.plantId}`)
+   const log = {
+      logDate: req.body.logDate,
+      logBody: req.body.logBody,
+      rain: req.body.rain,
+      avgTemp: req.body.avgTemp,
+      height: req.body.height,
+      output: req.body.output
+   }
+  
+   User.findById(req.user._id, (err, user) => {
+
+      // find plant by id
+      const plant = user.plants.id(req.body.plantId)
+
+      plant.logs.push(log);
+      // plant.save()
+      user.save()
+      
+      
+   })
+   .then(dbUserData => {
+      console.log(`dbUserData: ${dbUserData}`)
+      res.status(200).json(dbUserData)})
+   .catch(err => {
+      console.log(err);
+      res.status(500).json(err)
+   })
 };
 
 
@@ -84,18 +94,30 @@ const updateLog = (req, res) => {
 // REMOVE/DELETE log
 // api/logs/:id
 const deleteLog = (req, res) => {
-   Log.deleteOne({_id: req.params.id})
-      .then(dbLogData => {
-         res.status(200).json(dbLogData);
-      })
-      .catch(err => {
-         console.log(err);
-         res.status(500).json(err)
-      })
+   
+
+   User.findById(req.user._id, (err, user) => {
+      // find plant by id
+      console.log(`req.query.plantId: ${req.query.plantId}`)
+      console.log(`req.query.logId: ${req.query.logId}`)
+      
+      const plant = user.plants.id(req.query.plantId);
+      
+      plant.logs.pull({_id: req.query.logId});
+      user.save();
+   })
+   .then(dbPlantData => {
+      res.status(200).json(dbPlantData)
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err)
+    })
 }
 
 
 
 module.exports = {
-
+   addLog,
+   deleteLog
 }

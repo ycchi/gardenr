@@ -1,10 +1,16 @@
 
 const router = require("express").Router();
-const mongoose = require("mongoose");
+const { updateUserZipcode, getUser } = require('../controllers/userController');
 
-const { getPlants, getPlantById, addPlant, updatePlant, deletePlant } = require("../controllers/plantController");
+const { getPlants, getPlantById, addPlant, updatePlant, deletePlant, findPlants } = require("../controllers/plantController");
+
+const { addLog, deleteLog } = require("../controllers/logController")
+
+
 
 const { getWeatherData } = require("../controllers/weatherController");
+
+
 
 
 
@@ -19,24 +25,20 @@ const authCheck = (req, res, next) => {
 };
 
 
-// router.get("/user", authCheck, getUser);
-// router.post("/user", authCheck, addGarden);
-// router.get("/gardens", authCheck, getUserGardens);
-// router.delete("/gardens", authCheck, deletePlant)
-// router.get("/gardens/logs", authCheck, addLog)
-
-
-// router.get("/user", authCheck, getUserPlants);
-
 router.get("/weather", authCheck, getWeatherData);
 
 
-router.get("/plants", authCheck, getPlants);
+router.put("/user", authCheck, updateUserZipcode);
+router.get("/user", authCheck, getUser);
+
+router.get("/plants", authCheck, findPlants);
+// router.get("/plants", authCheck, getPlants);
 router.get("/plants/:id", authCheck, getPlantById);
 router.post("/plants", authCheck, addPlant);
 router.put("/plants/:id", authCheck, updatePlant);
 router.delete("/plants/:id", authCheck, deletePlant);
 
+router.post("/logs", authCheck, addLog);
+router.get("/logs", authCheck, deleteLog);
 
-
-module.exports = router
+module.exports = router;
