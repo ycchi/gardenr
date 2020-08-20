@@ -24,7 +24,7 @@
   "homepage": "https://github.com/ycchi/gardenr#readme",
   "dependencies": {
     "axios": "^0.18.0",
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "chart.js": "^2.8.0",
     "cheerio": "^1.0.0-rc.3",
     "concurrently": "^4.1.0",
